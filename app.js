@@ -3,10 +3,13 @@ const app = express();
 const port = process.env.PORT || 2323;
 const qrcode = require('qrcode');
 var mysql = require('mysql');
+var session = require("express-session");
+var MySQLStore = require("express-mysql-session")(session);
 
 require('dotenv').config();
 app.set('view engine', 'ejs');
 app.use('/static', express.static(__dirname + '/public'));
+
 
 
 
