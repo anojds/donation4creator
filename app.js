@@ -10,7 +10,12 @@ app.use('/static', express.static(__dirname + '/public'));
 
 
 
-app.get('/:qr', (req, res) => {
+app.get('/login', (req, res) => {
+    res.render('login.ejs');
+});
+
+app.get('/signin', (req, res) => {
+    res.render('signin.ejs');
 });
 
 app.get('/u/:id', (req, res) => {
