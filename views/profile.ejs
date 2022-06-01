@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url("/static/css/style.css");
+        @import url("/static/css/payment_box.css");
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&family=Roboto:wght@700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="profile_header"></div>
+    <div class="wrap">
+        <div class="main_content_wrap">
+            <div class="user_data_wrap">
+                <div class="profile_icon_wrap">
+                    <img class="profile_icon" src="<%= user_icon %>" />
+                </div>
+                <div class="profile_username_description">
+                    <span class="profile_username">
+                        <%= username %>
+                    </span>
+                    <span class="profile_description">
+                        <%= short_status %>
+                    </span>
+                </div>
+            </div>
+            <div class="information_wrap">
+                <span class="information_title">태그</span>
+                <span class="information" style="color: rgb(133, 133, 133)">
+                    <%= tag %>
+                </span>
+            </div>
+            <div class="information_wrap">
+                <span class="information_title">소개글</span>
+                <span class="information">
+                    <%= introduce %>
+                </span>
+            </div>
+        </div>
+
+        <div class="donation_div_wrap">
+            <div class="desired_amount">
+                <span class="money_title">희망하는 금액</span>
+                <span class="money_value">
+                    <%= desired_amount %>원
+                </span>
+            </div>
+
+            <% if(kakao_url !==null) { %>
+                <div class="kakao_wrap">
+                    <div class="payment_top" onclick="togle_payment('kakao')">
+                        <div class="kakao_title">카카오 QR</div>
+                        <img class="bottom_icon" id="kakao_button" src="/static/img/icon/left_dark.png" />
+                    </div>
+                    <div class="qr" id="kakao">
+                        <img id="kakao_qr" src="<%= kakao_url_img %>" />
+                        <span style="margin: 20px;color: rgb(0, 0, 0)">혹은</span>
+                        <div class="url_wrap" style="background-color: rgba(0, 0, 0, 0.221);" onclick="copy_text('<%= kakao_url %>')">
+                            <span id="kakao_link" style="color: #fff;">
+                                <%= kakao_url %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+                    <% if(toss_url !==null) { %>
+                        <div class="toss_wrap">
+                            <div class="payment_top" onclick="togle_payment('toss')">
+                                <div class="toss_title">토스 아이디</div>
+                                <img class="bottom_icon" id="toss_button" src="/static/img/icon/left.png" />
+                            </div>
+                            <div class="qr" id="toss">
+                                <img id="toss_qr" src="<%= toss_url_img %>" />
+                                <span style="margin: 20px;color: #fff">혹은</span>
+                                <div class="url_wrap" onclick="copy_text('<%= toss_url %>')">
+                                    <span id="toss_link" style="color: #fff;">
+                                        <%= toss_url %>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+
+                            <% if(paypal_url !==null) { %>
+                                <div class="paypal_wrap">
+                                    <div class="payment_top" onclick="togle_payment('paypal')">
+                                        <div class="paypal_title">페이팔 링크</div>
+                                        <img class="bottom_icon" id="paypal_button" src="/static/img/icon/left.png" />
+                                    </div>
+                                    <div class="qr" id="paypal">
+                                        <img id="paypal_qr" src="<%= paypal_url_img %>" />
+                                        <span style="margin: 20px;color: #fff">혹은</span>
+                                        <div class="url_wrap" onclick="copy_text('<%= paypal_url %>')">
+                                            <span id="paypal_link" style="color: #fff;">
+                                                <%= paypal_url %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+
+    <script>
+        var kakao = false, toss = false, paypal = false;
+        const clipboard = navigator.clipboard
+        function togle_payment(method) {
+            document.getElementById(method).style.display === 'flex' ? document.getElementById(method).style.display = 'none' : document.getElementById(method).style.display = 'flex';
+            switch (method) {
+                case 'kakao':
+                    kakao = !kakao;
+                    kakao ? document.getElementById("kakao_button").className = "bottom_icon_top" : document.getElementById("kakao_button").className = "bottom_icon"
+                    break;
+                case 'toss':
+                    toss = !toss;
+                    toss ? document.getElementById("toss_button").className = "bottom_icon_top" : document.getElementById("toss_button").className = "bottom_icon"
+                    break;
+                case 'paypal':
+                    paypal = !paypal;
+                    paypal ? document.getElementById("paypal_button").className = "bottom_icon_top" : document.getElementById("paypal_button").className = "bottom_icon"
+                    break;
+            }
+        }
+
+        function copy_text(text) {
+            clipboard.writeText(text).then(function () {
+                window.alert(text + ' 가 복사되었습니다')
+            })
+        }
+    </script>
+</body>
+
+</html>

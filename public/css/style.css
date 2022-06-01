@@ -1,0 +1,90 @@
+body {
+    margin: 0px;
+}
+
+.wrap {
+    display: flex;
+    justify-content: space-between
+}
+
+
+/* 사용자 배너 */
+.profile_header {
+    width: 100%;
+    height: 200px;
+    background-color: #f00;
+    background-image: url('/static/img/test/sample_header.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* 유저 ID 링크 */
+.user_data_wrap {
+    display: flex;
+}
+
+.profile_username_description {
+    display: flex;
+    flex-direction: column
+}
+
+.profile_description {
+    font-size: 18px;
+    margin: 5px 0px 0px 15px;
+    color: #889098;
+}
+
+.profile_username {
+    font-size: 30px;
+    margin: 13px 0px 0px 15px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main_content_wrap {
+    display: flex;
+    flex-direction: column
+}
+
+/* 사용자 아이콘 */
+.profile_icon_wrap {
+    width: 145px;
+    height: 145px;
+    margin-top: -45px;
+    margin-left: 40px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.profile_icon {
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+}
+
+/* 도네이션 wrap */
+.donation_div_wrap {
+    display: flex;
+    flex-direction: column
+}
+
+
+/* 소개글 */
+
+
+.information_wrap {
+    margin: 40px 0px 0px 50px;
+    display: flex;
+    flex-direction: column;
+}
+.information_title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.information {
+    color: rgb(51, 51, 51)
+}
