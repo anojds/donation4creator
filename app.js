@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 2323;
 const qrcode = require('qrcode');
+var mysql = require('mysql');
 
 require('dotenv').config();
 app.set('view engine', 'ejs');
@@ -12,20 +13,38 @@ app.use('/static', express.static(__dirname + '/public'));
 app.get('/:qr', (req, res) => {
 });
 
-app.get('/user/:id', (req, res) => {
+app.get('/u/:id', (req, res) => {
+    let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = null, qr_img_toss = null, qr_img_paypal = null;
 
-    let user_icon_link = '/static/img/test/icon.png';
-    var user_header_link = '/static/img/test/sample_header.jpg';
-    let username = 'anojds';
-    let short_status = '개발자 지망생 anojds입니다';
-    let introduce = '소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다소개글 입니다';
-    let tag = '개발자,블로거(였던것)';
-    let desired_amount = 2000;
-    let kakao_url = 'https://qr.kakaopay.com/FMkgMcV1I';
-    let toss_url = 'toss.me/anojds';
-    let paypal_url = 'paypal.me/anojds';
-    let qr_img_kakao = null, qr_img_toss = null, qr_img_paypal = null;
-
+    function handleMysqlRequest() {
+        return new Promise(function (resolve, reject) {
+            var conn = mysql.createConnection({
+                host: process.env.MYSQL_DEV_HOST,
+                port: process.env.MYSQL_DEV_PORT,
+                user: process.env.MYSQL_DEV_USER,
+                password: process.env.MYSQL_DEV_PASSWORD,
+                database: process.env.MYSQL_DEV_DATABASE
+            });
+            conn.connect(function (err) {
+                if (err) throw err;
+                conn.query(`select user_id, create_account_time, user_icon_img_link, user_header_img_link, short_description, user_description, tag, desired_amount, kakao_payment_url, toss_payment_url, paypal_payment_url FROM sendmoneycreator_user WHERE user_id = '${req.params.id}';`, function (err, result, fields) {
+                    if (err) throw err;
+                    user_icon_link = '/static/img/test/icon.png';
+                    user_header_link = '/static/img/test/sample_header.jpg';
+                    username = result[0].user_id;
+                    short_status = result[0].short_description;
+                    create_acc_time = result[0].create_account_time;
+                    introduce = result[0].user_description;
+                    tag = result[0].tag;
+                    desired_amount = result[0].desired_amount;
+                    kakao_url = result[0].kakao_payment_url;
+                    toss_url = result[0].toss_payment_url;
+                    paypal_url = result[0].paypal_payment_url;
+                    resolve('mysql data handle is ended!');
+                });
+            });
+        });
+    }
     function create_qrcode_1() {
         return new Promise(function (resolve, reject) {
             if (kakao_url !== null) {
@@ -65,31 +84,30 @@ app.get('/user/:id', (req, res) => {
         })
     }
 
-    create_qrcode_1().then(function (data) {
-        console.log('qr1', data);
-        create_qrcode_2().then(function (data) {
-            console.log('qr2', data);
-            create_qrcode_3().then(function (data) {
-                console.log('qr3', data);
-                res.render('profile.ejs', {
-                    "user_icon": `${user_icon_link}`,
-                    "user_header": `${user_header_link}`,
-                    "username": `${username}`,
-                    "short_status": `${short_status}`,
-                    "introduce": `${introduce}`,
-                    "tag": `${tag}`,
-                    "desired_amount": `${desired_amount}`,
-                    "kakao_url": `${kakao_url}`,
-                    "kakao_url_img": `${qr_img_kakao}`,
-                    "toss_url": `${toss_url}`,
-                    "toss_url_img": `${qr_img_toss}`,
-                    "paypal_url": `${paypal_url}`,
-                    "paypal_url_img": `${qr_img_paypal}`,
+    handleMysqlRequest().then(function (data) {
+        create_qrcode_1().then(function (data) {
+            create_qrcode_2().then(function (data) {
+                create_qrcode_3().then(function (data) {
+                    res.render('profile.ejs', {
+                        "user_icon": `${user_icon_link}`,
+                        "user_header": `${user_header_link}`,
+                        "username": `${username}`,
+                        "short_status": `${short_status}`,
+                        "create_acc_time": `${create_acc_time}`,
+                        "introduce": `${introduce}`,
+                        "tag": `${tag}`,
+                        "desired_amount": `${desired_amount}`,
+                        "kakao_url": `${kakao_url}`,
+                        "kakao_url_img": `${qr_img_kakao}`,
+                        "toss_url": `${toss_url}`,
+                        "toss_url_img": `${qr_img_toss}`,
+                        "paypal_url": `${paypal_url}`,
+                        "paypal_url_img": `${qr_img_paypal}`,
+                    });
                 });
             });
         });
     });
-
 });
 
 
