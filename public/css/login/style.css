@@ -43,7 +43,7 @@ body {
 /* 로그인 버튼 */
 .login_button {
     border-radius: 100px;
-    height: 60px;
+    height: 55px;
     border: 0px;
     background-color: #2979FF;
     color: #FFFFFF;
@@ -94,4 +94,9 @@ body {
     font-size: 23px;
     text-align: center;
     margin-top: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column
 }

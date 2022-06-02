@@ -61,7 +61,7 @@
                 </span>
             </div>
 
-            <% if(kakao_url !==null) { %>
+            <% if(kakao_url !== "") { %>
                 <div class="kakao_wrap">
                     <div class="payment_top" onclick="togle_payment('kakao')">
                         <div class="kakao_title">카카오 QR</div>
@@ -79,7 +79,7 @@
                 </div>
                 <% } %>
 
-                    <% if(toss_url !==null) { %>
+                    <% if(toss_url !== "") { %>
                         <div class="toss_wrap">
                             <div class="payment_top" onclick="togle_payment('toss')">
                                 <div class="toss_title">토스 아이디</div>
@@ -97,7 +97,7 @@
                         </div>
                         <% } %>
 
-                            <% if(paypal_url !==null) { %>
+                            <% if(paypal_url !== "") { %>
                                 <div class="paypal_wrap">
                                     <div class="payment_top" onclick="togle_payment('paypal')">
                                         <div class="paypal_title">페이팔 링크</div>

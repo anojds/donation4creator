@@ -1,6 +1,6 @@
 /* 희망 금액 */
 .desired_amount {
-    margin: 30px 20px 0px 20px;
+    margin: 30px 20px 30px 20px;
     display: flex;
     justify-content: space-between
 }
@@ -23,10 +23,9 @@
 /* 카카오 */
 .kakao_wrap {
     width: 350px;
-    margin: 20px;
+    margin: 10px 20px 10px 20px;
     border-radius: 10px;
     background-color: #F4DC34;
-    margin-top: 30px;
     /* border: 1px solid rgba(0, 0, 0, 0.212); */
     box-shadow: 0px 1px 10px #f4de3486;
 }
@@ -42,7 +41,7 @@
 /* 토스 */
 .toss_wrap {
     width: 350px;
-    margin: 0px 20px 20px 20px;
+    margin: 10px 20px 10px 20px;
     border-radius: 10px;
     background-color: #005DF7;
     /* border: 1px solid rgba(0, 0, 0, 0.212); */
@@ -61,7 +60,7 @@
 /* 페이팔 */
 .paypal_wrap {
     width: 350px;
-    margin: 0px 20px 20px 20px;
+    margin: 10px 20px 10px 20px;
     border-radius: 10px;
     background-color: #27346A;
     /* border: 1px solid rgba(0, 0, 0, 0.212); */

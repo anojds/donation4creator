@@ -1,57 +1,7 @@
-const express = require('express');
-const port = process.env.PORT || 2323;
-const qrcode = require('qrcode');
-var mysql = require('mysql');
-var session = require("express-session");
-var MySQLStore = require("express-mysql-session")(session);
-var bodyParser = require('body-parser')
-
-const app = express();
-
-require('dotenv').config();
-app.set('view engine', 'ejs');
-app.use('/static', express.static(__dirname + '/public'));
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-app.use(session({
-	secret: process.env.SESSION_SECRET,
-	resave: false,
-	saveUninitialized: false,
-    store : new MySQLStore({
-        host: process.env.MYSQL_DEV_HOST,
-        port: process.env.MYSQL_DEV_PORT,
-        user: process.env.MYSQL_DEV_USER,
-        password: process.env.MYSQL_DEV_PASSWORD,
-        database: process.env.MYSQL_DEV_DATABASE
-    })
-}));
-
-const auth = require('./routes/auth/auth.js');
-app.use('/auth', auth);
-
-
-const login_sigin_ejs = require('./routes/login_signin.js');
-app.use('/', login_sigin_ejs);
-
-
-function authIsLogied(req) {
-    if(req.session.is_logined) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-app.get('/', (req, res) => {
-    console.log(req.session);
-    res.send('s')
-});
+const router = require('express').Router();
 
 app.get('/u/:id', (req, res) => {
-    console.log(authIsLogied(req))
-    let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = "", qr_img_toss = "", qr_img_paypal = "";
+    let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = null, qr_img_toss = null, qr_img_paypal = null;
 
     function handleMysqlRequest() {
         return new Promise(function (resolve, reject) {
@@ -68,7 +18,7 @@ app.get('/u/:id', (req, res) => {
                     if (err) throw err;
                     user_icon_link = '/static/img/test/icon.png';
                     user_header_link = '/static/img/test/sample_header.jpg';
-                    username = `${req.params.id}`;
+                    username = result[0].user_id;
                     short_status = result[0].short_description;
                     create_acc_time = result[0].create_account_time;
                     introduce = result[0].user_description;
@@ -84,7 +34,7 @@ app.get('/u/:id', (req, res) => {
     }
     function create_qrcode_1() {
         return new Promise(function (resolve, reject) {
-            if (kakao_url !== "") {
+            if (kakao_url !== null) {
                 qrcode.toDataURL(kakao_url, function (err, url) {
                     qr_img_kakao = url.toString('utf-8');
                     resolve('kakao_url is ok!');
@@ -97,7 +47,7 @@ app.get('/u/:id', (req, res) => {
 
     function create_qrcode_2() {
         return new Promise(function (resolve, reject) {
-            if (toss_url !== "") {
+            if (toss_url !== null) {
                 qrcode.toDataURL(toss_url, function (err, url) {
                     qr_img_toss = url.toString('utf-8');
                     resolve('toss_url is ok!');
@@ -110,7 +60,7 @@ app.get('/u/:id', (req, res) => {
 
     function create_qrcode_3() {
         return new Promise(function (resolve, reject) {
-            if (paypal_url !== "") {
+            if (paypal_url !== null) {
                 qrcode.toDataURL(paypal_url, function (err, url) {
                     qr_img_paypal = url.toString('utf-8');
                     resolve('paypal_url is ok!');
@@ -148,7 +98,4 @@ app.get('/u/:id', (req, res) => {
     });
 });
 
-
-app.listen(port, () => {
-    console.log(`server is listening at localhost:${port}`);
-});
+module.exports = router;
