@@ -27,7 +27,7 @@ router.post('/login', (req, res) => {
                 .digest('hex');
 
                 if (id === result[0].user_id && hashPassword === result[0].user_password) {
-                    req.session.is_logined = true;
+                    req.session.sis_logined = true;
                     req.session.nickname = result[0].user_id;
                     res.redirect('/');
                 } else {
