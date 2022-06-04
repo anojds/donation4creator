@@ -1,0 +1,43 @@
+.header_container {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    height: 60px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #C4C4C4;
+    justify-content: space-between;
+}
+
+.header_left {
+    display: flex;
+    align-items: center
+}
+
+.header_right {
+    display: flex;
+    align-items: center
+}
+
+/* 아이콘 */
+.service_icon {
+    width: 40px;
+    height: 40px;
+    margin: 0px 20px 0px 20px;
+    border-radius: 10px;
+}
+
+/* 헤더 리스트 */
+.title_list {
+    font-weight: bold;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: .2s;
+    margin: 0px 20px 0px 20px;
+}
+
+.title_list:hover {
+    cursor: pointer;
+    font-size: 20px;
+    transition: .2s;
+}

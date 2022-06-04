@@ -35,6 +35,9 @@ app.use('/auth', auth);
 const login_sigin_ejs = require('./routes/login_signin.js');
 app.use('/', login_sigin_ejs);
 
+const setting_routes = require('./routes/setting.js');
+app.use('/', setting_routes);
+
 
 function authIsLogied(req) {
     if(req.session.is_logined) {

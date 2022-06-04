@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 30px;
+}
+
+
+/* 반겨주는 텍스트 */
+.hi_1{
+    font-size: 30px;
+    font-weight: 200;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.hi_2{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', sans-serif;
+}

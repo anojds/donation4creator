@@ -68,6 +68,11 @@ body {
     color: #00AFF4
 }
 
+.register_text:hover {
+    cursor: pointer;
+}
+
+
 /* 오른쪽 이미지 */
 .side_img_wrap {
     width: 50%;

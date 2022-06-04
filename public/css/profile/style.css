@@ -16,6 +16,7 @@ body {
     background-image: url('/static/img/test/sample_header.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: 60px;
 }
 
 /* 유저 ID 링크 */
