@@ -45,8 +45,9 @@ function authIsLogied(req) {
 }
 
 app.get('/', (req, res) => {
-    console.log(req.session);
-    res.send('s')
+    res.render('main.ejs', {
+        "is_logined": `${authIsLogied(req)}`
+    })
 });
 
 app.get('/u/:id', (req, res) => {
@@ -64,7 +65,8 @@ app.get('/u/:id', (req, res) => {
             });
             conn.connect(function (err) {
                 if (err) throw err;
-                conn.query(`select user_id, create_account_time, user_icon_img_link, user_header_img_link, short_description, user_description, tag, desired_amount, kakao_payment_url, toss_payment_url, paypal_payment_url FROM sendmoneycreator_user WHERE user_id = '${req.params.id}';`, function (err, result, fields) {
+                conn.query(`select user_id, create_account_time, user_icon_link, user_header_link, short_description, user_description, tag, desired_amount, kakao_payment_url, toss_payment_url, paypal_payment_url FROM sendmoneycreator_user WHERE user_id = '${req.params.id}';`, function (err, result, fields) {
+                    console.log(result);
                     if (err) throw err;
                     user_icon_link = '/static/img/test/icon.png';
                     user_header_link = '/static/img/test/sample_header.jpg';

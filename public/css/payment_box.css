@@ -22,7 +22,7 @@
 
 /* 카카오 */
 .kakao_wrap {
-    width: 350px;
+    width: 300px;
     margin: 10px 20px 10px 20px;
     border-radius: 10px;
     background-color: #F4DC34;
@@ -40,7 +40,7 @@
 
 /* 토스 */
 .toss_wrap {
-    width: 350px;
+    width: 300px;
     margin: 10px 20px 10px 20px;
     border-radius: 10px;
     background-color: #005DF7;
@@ -59,7 +59,7 @@
 
 /* 페이팔 */
 .paypal_wrap {
-    width: 350px;
+    width: 300px;
     margin: 10px 20px 10px 20px;
     border-radius: 10px;
     background-color: #27346A;

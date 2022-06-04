@@ -4,7 +4,7 @@ body {
 
 .wrap {
     display: flex;
-    justify-content: space-between
+    justify-content: center;
 }
 
 
@@ -21,6 +21,9 @@ body {
 /* 유저 ID 링크 */
 .user_data_wrap {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .profile_username_description {
@@ -30,27 +33,29 @@ body {
 
 .profile_description {
     font-size: 18px;
-    margin: 5px 0px 0px 15px;
     color: #889098;
+    margin: 15px 0px 20px 40px
 }
 
 .profile_username {
     font-size: 30px;
-    margin: 13px 0px 0px 15px;
     font-weight: 700;
+    margin-left: 40px;
     font-family: 'Roboto', sans-serif;
 }
 
 .main_content_wrap {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
 }
 
 /* 사용자 아이콘 */
 .profile_icon_wrap {
-    width: 145px;
-    height: 145px;
-    margin-top: -45px;
+    width: 144px;
+    height: 144px;
+    margin-top: -75px;
     margin-left: 40px;
     background-color: #fff;
     display: flex;
@@ -67,8 +72,12 @@ body {
 
 /* 도네이션 wrap */
 .donation_div_wrap {
+    width: 100vw;
     display: flex;
-    flex-direction: column
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
 }
 
 
@@ -76,15 +85,34 @@ body {
 
 
 .information_wrap {
-    margin: 40px 0px 0px 50px;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 .information_title {
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.information {
-    color: rgb(51, 51, 51)
+.introduce {
+    color: rgb(51, 51, 51);
+    width: 80%;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+
+.tag_wrap {
+    margin-left: 40px;
+    margin-bottom: 40px;
+}
+.tag_div {
+    padding: 8px 20px 8px 20px;
+    border: 1px solid #bbb;
+    border-radius: 30px;
+    font-size: 12px;
 }

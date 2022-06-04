@@ -8,7 +8,8 @@
     <title>Document</title>
     <style>
         @import url("/static/css/style.css");
-        @import url("/static/css/payment_box.css");
+        @import url("/static/css/scrollbar.css");
+        @import url("/static/css/payment_box2.css");
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,98 +25,56 @@
                 <div class="profile_icon_wrap">
                     <img class="profile_icon" src="<%= user_icon %>" />
                 </div>
-                <div class="profile_username_description">
-                    <span class="profile_username">
-                        <%= username %>
-                    </span>
-                    <span class="profile_description">
-                        <%= short_status %>
-                    </span>
+                <span class="profile_username">
+                    <%= username %>
+                </span>
+                <span class="profile_description">
+                    <%= short_status %>
+                </span>
+                <div class="tag_wrap">
+                    <div class="tag_div">#개발자</div>
                 </div>
             </div>
-            <div class="information_wrap">
-                <span class="information_title">태그</span>
-                <span class="information" style="color: rgb(133, 133, 133)">
-                    <%= tag %>
-                </span>
-            </div>
-            <div class="information_wrap">
-                <span class="information_title">소개글</span>
-                <span class="information">
-                    <%= introduce %>
-                </span>
-            </div>
-            <div class="information_wrap">
-                <span class="information_title">가입일</span>
-                <span class="information">
-                    <%= create_acc_time %>
-                </span>
-            </div>
-        </div>
-
-        <div class="donation_div_wrap">
-            <div class="desired_amount">
-                <span class="money_title">희망하는 금액</span>
-                <span class="money_value">
-                    <%= desired_amount %>원
-                </span>
-            </div>
-
-            <% if(kakao_url !== "") { %>
-                <div class="kakao_wrap">
-                    <div class="payment_top" onclick="togle_payment('kakao')">
-                        <div class="kakao_title">카카오 QR</div>
-                        <img class="bottom_icon" id="kakao_button" src="/static/img/icon/left_dark.png" />
-                    </div>
-                    <div class="qr" id="kakao">
-                        <img id="kakao_qr" src="<%= kakao_url_img %>" />
-                        <span style="margin: 20px;color: rgb(0, 0, 0)">혹은</span>
-                        <div class="url_wrap" style="background-color: rgba(0, 0, 0, 0.221);" onclick="copy_text('<%= kakao_url %>')">
-                            <span id="kakao_link" style="color: #fff;">
-                                <%= kakao_url %>
-                            </span>
-                        </div>
-                    </div>
+            <p style="margin-left: 40px;font-weight: bold;font-size: 25px;"><%= username %> 님 후원하기</p>
+            <div class="payment_wrap">
+                <% if(kakao_url !== "0" ) { %>
+                <div class="item_wrap" id="item_wrap_kakao">
+                    <span class="item_title" id="item_title_kakao">카카오 QR</span>
+                    <img id="item_qr" src="<%= kakao_url_img %>" />
+                    <span style="margin: 20px;">혹은</span>
+                    <span class="item_link_wrap" onclick="copy_text('<%= kakao_url %>')"><%= kakao_url %></span>
                 </div>
                 <% } %>
-
-                    <% if(toss_url !== "") { %>
-                        <div class="toss_wrap">
-                            <div class="payment_top" onclick="togle_payment('toss')">
-                                <div class="toss_title">토스 아이디</div>
-                                <img class="bottom_icon" id="toss_button" src="/static/img/icon/left.png" />
-                            </div>
-                            <div class="qr" id="toss">
-                                <img id="toss_qr" src="<%= toss_url_img %>" />
-                                <span style="margin: 20px;color: #fff">혹은</span>
-                                <div class="url_wrap" onclick="copy_text('<%= toss_url %>')">
-                                    <span id="toss_link" style="color: #fff;">
-                                        <%= toss_url %>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                <% if(toss_url !== "0") { %>
+                <div class="item_wrap" id="item_wrap_toss">
+                    <span class="item_title" id="item_title_toss">토스 아이디</span>
+                    <img id="item_qr" src="<%= toss_url_img %>" />
+                    <span style="margin: 20px;">혹은</span>
+                    <div class="item_link_wrap" onclick="copy_text('<%= toss_url %>')"><%= toss_url %></div>
+                </div>
+                <% } %>
+                <% if(paypal_url !== "0") { %>
+                <div class="item_wrap" id="item_wrap_paypal">
+                    <span class="item_title" id="item_title_paypal">페이팔 링크</span>
+                    <img id="item_qr" src="<%= kakao_url_img %>" />
+                    <span style="margin: 20px;">혹은</span>
+                    <div class="item_link_wrap" onclick="copy_text('<%= paypal_url %>')"><%= paypal_url %></div>
+                </div>
+                <% } %>
+            </div>
+            <p style="margin-left: 40px;margin-top: 50px;font-weight: bold;font-size: 25px;"><%= username %> 님의 소개글</span>
+            <div class="information_wrap">
+                <% if(introduce !== "0") { %>
+                    <span class="introduce">
+                        <%= introduce %>
+                    </span>
+                    <% } else { %>
+                        <span class="introduce">
+                            소개글이 없습니다 (；☉_☉)
+                        </span>
                         <% } %>
-
-                            <% if(paypal_url !== "") { %>
-                                <div class="paypal_wrap">
-                                    <div class="payment_top" onclick="togle_payment('paypal')">
-                                        <div class="paypal_title">페이팔 링크</div>
-                                        <img class="bottom_icon" id="paypal_button" src="/static/img/icon/left.png" />
-                                    </div>
-                                    <div class="qr" id="paypal">
-                                        <img id="paypal_qr" src="<%= paypal_url_img %>" />
-                                        <span style="margin: 20px;color: #fff">혹은</span>
-                                        <div class="url_wrap" onclick="copy_text('<%= paypal_url %>')">
-                                            <span id="paypal_link" style="color: #fff;">
-                                                <%= paypal_url %>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            <% } %>
-                        </div>
-                    </div>
+            </div>
+    </div>
 
     <script>
         var kakao = false, toss = false, paypal = false;

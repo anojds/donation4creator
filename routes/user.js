@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
-app.get('/u/:id', (req, res) => {
-    let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = null, qr_img_toss = null, qr_img_paypal = null;
+router.get('/:id', (req, res) => {
+    console.log(authIsLogied(req))
+    let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = "", qr_img_toss = "", qr_img_paypal = "";
 
     function handleMysqlRequest() {
         return new Promise(function (resolve, reject) {
@@ -18,7 +19,7 @@ app.get('/u/:id', (req, res) => {
                     if (err) throw err;
                     user_icon_link = '/static/img/test/icon.png';
                     user_header_link = '/static/img/test/sample_header.jpg';
-                    username = result[0].user_id;
+                    username = `${req.params.id}`;
                     short_status = result[0].short_description;
                     create_acc_time = result[0].create_account_time;
                     introduce = result[0].user_description;
@@ -34,7 +35,7 @@ app.get('/u/:id', (req, res) => {
     }
     function create_qrcode_1() {
         return new Promise(function (resolve, reject) {
-            if (kakao_url !== null) {
+            if (kakao_url !== "") {
                 qrcode.toDataURL(kakao_url, function (err, url) {
                     qr_img_kakao = url.toString('utf-8');
                     resolve('kakao_url is ok!');
@@ -47,7 +48,7 @@ app.get('/u/:id', (req, res) => {
 
     function create_qrcode_2() {
         return new Promise(function (resolve, reject) {
-            if (toss_url !== null) {
+            if (toss_url !== "") {
                 qrcode.toDataURL(toss_url, function (err, url) {
                     qr_img_toss = url.toString('utf-8');
                     resolve('toss_url is ok!');
@@ -60,7 +61,7 @@ app.get('/u/:id', (req, res) => {
 
     function create_qrcode_3() {
         return new Promise(function (resolve, reject) {
-            if (paypal_url !== null) {
+            if (paypal_url !== "") {
                 qrcode.toDataURL(paypal_url, function (err, url) {
                     qr_img_paypal = url.toString('utf-8');
                     resolve('paypal_url is ok!');
