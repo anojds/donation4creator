@@ -17,25 +17,27 @@ router.post('/login', (req, res) => {
             database: process.env.MYSQL_DEV_DATABASE
         });
         conn.connect(function (err) {
-        conn.query(
-            `select user_id, salt, user_password From sendmoneycreator_user where user_id = '${id}';`,
-            function (err, result, fields) {
-                if (err) throw err;
-                const hashPassword = crypto
-                .createHash('sha512')
-                .update(password + result[0].salt)
-                .digest('hex');
-
-                if (id === result[0].user_id && hashPassword === result[0].user_password) {
-                    req.session.is_logined = true;
-                    req.session.nickname = result[0].user_id;
-                    res.redirect('/');
-                } else {
-                    //s
-                }
-                
-            },
-        );
+            conn.query(
+                `select user_id, salt, user_password From sendmoneycreator_user where user_id = '${id}';`,
+                function (err, result, fields) {
+                    if (result.length > 0) {
+                        if (err) throw err;
+                        const hashPassword = crypto
+                            .createHash('sha512')
+                            .update(password + result[0].salt)
+                            .digest('hex');
+                            
+                        if (id === result[0].user_id && hashPassword === result[0].user_password) {
+                            req.session.is_logined = true;
+                            req.session.nickname = result[0].user_id;
+                            res.redirect('/');
+                        } else {
+                        }
+                    } else {
+                        res.send("alert('비밀번호가 일치하지 않습니다')")
+                    }
+                },
+            );
         })
     })
 })

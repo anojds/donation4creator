@@ -5,12 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        @import url("/static/css/main/style.css");
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+    </style>
 </head>
 <body>
     <% include ./header.ejs %>
-    <%= is_logined  %>
-    <form action="/auth/logout" method="post">
-        <input type="submit" value="로그아웃" class="login_button">
-    </form>
+    <div class="wrap_1">
+        <div class="text_wrap">
+            <span class="text_1">좋아하는 <span class="text_2">크리에이터</span>에게 후원을 해보세요.</span>
+        </div>
+        <div class="link_wrap">
+            <span class="link_1">donate4creator.com/u/</span>
+            <span class="link_2">username</span>
+            <input class="link_button" type="button" value="지금 시작하기">
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/js/main_animation.js"></script>
 </body>
 </html>
