@@ -31,6 +31,7 @@ router.post('/login', (req, res) => {
                     req.session.nickname = result[0].user_id;
                     res.redirect('/');
                 } else {
+                    //s
                 }
                 
             },
