@@ -1,7 +1,7 @@
 let count = 0;
 let animationCount = true;
 let text_span = document.getElementsByClassName('text_2')[0];
-let textList = ["유튜버","작가","BJ","개발자","블로거","틱톡커","디자이너"]
+let textList = ["유튜버","작가","BJ","개발자","블로거","틱톡커","디자이너"];
 
 function changeAnimation() {
     if(count === 0) {
@@ -21,7 +21,7 @@ text_span.addEventListener('animationend', () => {
     if(animationCount) {
         text_span.style.visibility = "hidden";
     }
-    animationCount = !animationCount
+    animationCount = !animationCount;
   });
 
-let interval = setInterval(changeAnimation, 800)
+let interval = setInterval(changeAnimation, 800);
