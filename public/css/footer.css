@@ -1,0 +1,35 @@
+.footer_container {
+    padding: 30px 60px 20px 60px;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid #bbb
+}
+
+.fotter_top {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.fotter_domain {
+    font-weight: bold;
+    font-size: 23px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.fotter_top_1_list {
+    margin: 10px 0px 10px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.footer_bottom {
+    padding-top: 10px;
+    border-top: 1.3px solid rgb(225, 225, 225);
+}
+
+.country_wrap {
+    display: flex;
+}
+
+.footer_bottom_country {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 100;
+}

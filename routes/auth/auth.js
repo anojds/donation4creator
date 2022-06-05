@@ -66,7 +66,6 @@ router.post('/register', (req, res) => {
             `INSERT INTO sendmoneycreator_user (user_id, salt, user_password,user_email,create_account_time) values ('${id}','${salt}','${hashPassword}','${email}','1')`,
             function (err, rows, fields) {
                 if (err) {
-                    console.log('sign_up error', err);
                     res.send("문제가 발생했습니다 좀이따 다시 시도해보시고 만약 오류가 지속된다면 관리자에게 문의를 주세요 (Discord : anojds#1234)");
                 } else {
                     res.redirect('/');
@@ -76,7 +75,7 @@ router.post('/register', (req, res) => {
     })
 });
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     req.session.destroy(function (err) {
         res.redirect('/');
     });

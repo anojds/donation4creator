@@ -1,18 +1,55 @@
 body {
     margin: 0;
-    padding: 30px;
+    padding-top: 40px;
+}
+
+.wrap {
+    padding: 50px;
+    display: flex;
+    flex-direction: column
 }
 
 
 /* 반겨주는 텍스트 */
-.hi_1{
+.hi_1 {
     font-size: 30px;
     font-weight: 200;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-.hi_2{
+.hi_2 {
     font-size: 30px;
     font-weight: bold;
     font-family: 'Noto Sans KR', sans-serif;
+}
+
+.title {
+    margin: 50px 0px 20px 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 23px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bbb;
+    font-weight: bold;
+}
+
+.form-label {
+    font-size: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.label_title {
+    font-size: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 40px 0px 0px 0px 
+}
+
+/* 태그 라디오 버튼 */
+
+.form-check {
+    margin-right: 0.5rem;
+}
+
+.tag_radio_wrap {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }

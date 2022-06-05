@@ -1,18 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        @import url("/static/css/setting/style.css");
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document</title>
+  <style>
+    @import url("/static/css/setting/style.css");
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
+
 <body>
-    <span class="hi_1">안녕하세요 </span>
-    <span class="hi_2"><%= username %></span>
-    <span class="hi_1"> 님.</span>
+  <% include ./header.ejs %>
+    <div class="wrap">
+      <div class="hi">
+        <span class="hi_1">안녕하세요 </span>
+        <span class="hi_2">
+          <%= username %>
+        </span>
+        <span class="hi_1"> 님.</span>
+      </div>
+      <span class="title">프로필 정보</span>
+      <div class="profile_info">
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">아이디</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" value="<%= username %>" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">한줄 소개</label>
+          <input type="text" class="form-control" id="formGroupExampleInput"
+            value="<% if (short_status !== '0') {%> <%= short_status %> <% } %>" placeholder="아직 한줄소개가 없군요"
+            maxlength="30">
+        </div>
+        <span class="label_title">태그</span>
+        <div class="tag_radio_wrap">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_1" value="option1">
+            <label class="form-check-label" for="inlineCheckbox1">개발자</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">방송 BJ</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_3" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">유튜버</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_4" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">디자이너</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_5" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">마케터</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_6" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">작가</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_7" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">아티스트</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_8" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">SNS</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_9" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">기타</label>
+          </div>
+        </div>
+        <span class="label_title">소개</span>
+        <div class="input-group" style="margin-top: 10px;">
+          <textarea class="form-control" aria-label="With textarea" maxlength="500"></textarea>
+        </div>
+      </div>
+      <span class="title">후원 링크</span>
+      <span>QR코드는 후원 링크에 따라 자동으로 생성됩니다</span>
+      <span class="label_title">카카오</span>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">https://qr.kakaopay.com/</span>
+        <input type="text" class="form-control" id="kakao_url" aria-describedby="basic-addon3">
+      </div>
+      <span class="label_title">토스</span>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">https://toss.me/</span>
+        <input type="text" class="form-control" id="toss_url" aria-describedby="basic-addon3">
+      </div>
+      <span class="label_title">페이팔</span>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">https://www.paypal.me/</span>
+        <input type="text" class="form-control" id="paypal_url" aria-describedby="basic-addon3">
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function onloading(data) {
+        // 라디오 버튼
+
+        arr = data.split(',');
+        arr.map(function (el) {
+          document.getElementById("tag_" + el).checked = true;
+        });
+
+        // 페이먼트 url(카카오)
+        if (kakao_url !== "0") {
+          var payment_url = '<%= kakao_url %>'
+          var payment_url = payment_url.replace(`https://qr.kakaopay.com/`, '');
+          document.getElementById("kakao_url").value = payment_url;
+        }
+        // 페이먼트 url(토스)
+        if (toss_url !== "0") {
+          var payment_url = '<%= toss_url %>'
+          var payment_url = payment_url.replace(`https://toss.me/`, '');
+          document.getElementById("toss_url").value = payment_url;
+        }
+        // 페이먼트 url(페이팔)
+        if (paypal_url !== "0") {
+          var payment_url = '<%= paypal_url %>'
+          var payment_url = payment_url.replace(`https://www.paypal.me/`, '');
+          document.getElementById("paypal_url").value = payment_url;
+        }
+      }
+      onloading('<%= tag %>')
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -1,12 +1,65 @@
 const router = require('express').Router();
+var mysql = require('mysql');
+
+function authIsLogied(req) {
+    if(req.session.is_logined) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 router.get('/setting', (req, res) => {
     if (req.session.is_logined) {
-        res.render('setting.ejs', {
-            'username': req.session.nickname
+        let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = "", qr_img_toss = "", qr_img_paypal = "";
+        return new Promise(function (resolve, reject) {
+            var conn = mysql.createConnection({
+                host: process.env.MYSQL_DEV_HOST,
+                port: process.env.MYSQL_DEV_PORT,
+                user: process.env.MYSQL_DEV_USER,
+                password: process.env.MYSQL_DEV_PASSWORD,
+                database: process.env.MYSQL_DEV_DATABASE
+            });
+            conn.connect(function (err) {
+                if (err) throw err;
+                conn.query(`select user_id, create_account_time, user_icon_link, user_header_link, short_description, user_description, tag, desired_amount, kakao_payment_url, toss_payment_url, paypal_payment_url FROM sendmoneycreator_user WHERE user_id = '${req.session.nickname}';`, function (err, result, fields) {
+                    if (err) throw err;
+                    user_icon_link = '/static/img/test/icon.png';
+                    user_header_link = '/static/img/test/sample_header.jpg';
+                    username = `${req.session.nickname}`;
+                    short_status = result[0].short_description;
+                    create_acc_time = result[0].create_account_time;
+                    introduce = result[0].user_description;
+                    tag = result[0].tag;
+                    desired_amount = result[0].desired_amount;
+                    kakao_url = result[0].kakao_payment_url;
+                    toss_url = result[0].toss_payment_url;
+                    paypal_url = result[0].paypal_payment_url;
+                    resolve('mysql data handle is ended!');
+
+                    res.render('setting.ejs', {
+                        "user_icon": `${user_icon_link}`,
+                        "user_header": `${user_header_link}`,
+                        "username": `${username}`,
+                        "short_status": `${short_status}`,
+                        "create_acc_time": `${create_acc_time}`,
+                        "introduce": `${introduce}`,
+                        "tag": `${tag}`,
+                        "desired_amount": `${desired_amount}`,
+                        "kakao_url": `${kakao_url}`,
+                        "kakao_url_img": `${qr_img_kakao}`,
+                        "toss_url": `${toss_url}`,
+                        "toss_url_img": `${qr_img_toss}`,
+                        "paypal_url": `${paypal_url}`,
+                        "paypal_url_img": `${qr_img_paypal}`,
+                        "isLogined": `${authIsLogied(req)}`
+                    });
+                });
+            });
         });
     } else {
-        res.redirect('login')
+        res.redirect('/login')
     }
 });
 

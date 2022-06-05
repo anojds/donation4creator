@@ -28,6 +28,10 @@
     border-radius: 10px;
 }
 
+.service_icon:hover {
+    cursor: pointer;
+}
+
 /* 헤더 리스트 */
 .title_list {
     font-weight: bold;

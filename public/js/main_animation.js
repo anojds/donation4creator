@@ -24,4 +24,4 @@ text_span.addEventListener('animationend', () => {
     animationCount = !animationCount;
   });
 
-let interval = setInterval(changeAnimation, 800);
+let interval = setInterval(changeAnimation, 1000);

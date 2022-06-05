@@ -4,7 +4,7 @@ body {
 }
 
 .wrap_1 {
-    width: 100vw;
+    width: 100%;
     height: 80vh;
     display: flex;
     justify-content: center;
@@ -80,4 +80,87 @@ body {
 
 .link_button:hover {
     cursor: pointer;
+}
+
+.wrap_2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    margin-top: 10vh;
+}
+
+.info_title {
+    font-weight: bold;
+    background: linear-gradient(to right, #4568DC, #B06AB3);
+    -webkit-background-clip: text;
+    color: transparent
+}
+
+.info_span {
+    font-size: 25px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    margin-top: 30px;
+    text-align: center;
+    line-height: 40px;
+}
+
+
+.wrap_3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: rgba(6, 120, 233, 0.123);
+    height: 90vh;
+}
+
+.list_title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+    color: rgb(6, 120, 233);
+}
+
+.list_span {
+    font-size: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    margin: 20px 0px 40px 0px;
+    text-align: center;
+    line-height: 40px;
+    color: rgba(6, 120, 233, 0.67);
+}
+
+.wrap_4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    background-color: rgba(239, 70, 241, 0.123);
+    height: 90vh;
+}
+
+.list_title2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+    color: rgb(238, 70, 241);
+}
+
+.list_span2 {
+    font-size: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    margin: 20px 0px 40px 0px;
+    text-align: center;
+    line-height: 40px;
+    color: rgb(238, 70, 241);
 }
