@@ -86,22 +86,24 @@
       <span class="label_title">카카오</span>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon3">https://qr.kakaopay.com/</span>
-        <input type="text" class="form-control" id="kakao_url" aria-describedby="basic-addon3">
+        <input type="text" class="form-control" id="kakao_url_input" aria-describedby="basic-addon3">
       </div>
       <span class="label_title">토스</span>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon3">https://toss.me/</span>
-        <input type="text" class="form-control" id="toss_url" aria-describedby="basic-addon3">
+        <input type="text" class="form-control" id="toss_url_input" aria-describedby="basic-addon3">
       </div>
       <span class="label_title">페이팔</span>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon3">https://www.paypal.me/</span>
-        <input type="text" class="form-control" id="paypal_url" aria-describedby="basic-addon3">
+        <input type="text" class="form-control" id="paypal_url_input" aria-describedby="basic-addon3">
       </div>
+      <p style="font-size:320px"> </p>
+      <button type="button" class="btn btn-primary">저장하기</button>
     </div>
 
     <script type="text/javascript">
-      function onloading(data) {
+      function onloading(data,kakao_link,toss_link,paypal_link) {
         // 라디오 버튼
 
         arr = data.split(',');
@@ -110,25 +112,22 @@
         });
 
         // 페이먼트 url(카카오)
-        if (kakao_url !== "0") {
-          var payment_url = '<%= kakao_url %>'
-          var payment_url = payment_url.replace(`https://qr.kakaopay.com/`, '');
-          document.getElementById("kakao_url").value = payment_url;
+        if (kakao_link !== "0") {
+          document.getElementById("kakao_url_input").value = kakao_link.replace(`https://qr.kakaopay.com/`, '');
         }
+
         // 페이먼트 url(토스)
-        if (toss_url !== "0") {
-          var payment_url = '<%= toss_url %>'
-          var payment_url = payment_url.replace(`https://toss.me/`, '');
-          document.getElementById("toss_url").value = payment_url;
+        if (toss_link !== '0') {
+          document.getElementById("toss_url_input").value = toss_link.replace(`https://toss.me/`, '');
+
         }
+
         // 페이먼트 url(페이팔)
-        if (paypal_url !== "0") {
-          var payment_url = '<%= paypal_url %>'
-          var payment_url = payment_url.replace(`https://www.paypal.me/`, '');
-          document.getElementById("paypal_url").value = payment_url;
+        if (paypal_link !== "0") {
+          document.getElementById("paypal_url_input").value = paypal_link.replace(`https://www.paypal.me/`, '');
         }
       }
-      onloading('<%= tag %>')
+      onloading('<%= tag %>','<%= kakao_url %>','<%= toss_url %>','<%= paypal_url %>')
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

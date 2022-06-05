@@ -29,6 +29,8 @@ app.use(session({
 const auth = require('./routes/auth/auth.js');
 app.use('/auth', auth);
 
+const update = require('./routes/auth/update.js');
+app.use('/auth', update);
 
 const login_sigin_ejs = require('./routes/login_signin.js');
 app.use('/', login_sigin_ejs);
