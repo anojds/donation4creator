@@ -58,3 +58,8 @@ form {
     display: flex;
     flex-direction: column;
 }
+
+
+.col:hover {
+    cursor: pointer;
+}

@@ -41,6 +41,9 @@ app.use('/setting', setting_routes);
 const profile_routes = require('./routes/profile.js');
 app.use('/u', profile_routes);
 
+const iframe_routes = require('./routes/iframe.js');
+app.use('/iframe', iframe_routes);
+
 
 function authIsLogied(req) {
     if(req.session.is_logined) {

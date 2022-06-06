@@ -1,0 +1,43 @@
+<style>
+    body {
+        margin: 0px;
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+        background-color: #ed6d5e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: .2s;
+    }
+
+    .container:hover {
+        cursor: pointer;
+        background-color: #ffa399;
+        transition: .2s
+    }
+
+    .container>span {
+        color: #fff;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+<div class="container" onclick="donate4creator_iframe1_href()">
+    <span id="donate4creator_iframe1_text">후원하기</span>
+</div>
+
+<script type="text/javascript">
+    const urlParams = new URL(location.href).searchParams;
+
+    document.getElementById('donate4creator_iframe1_text').innerText = urlParams.get('text');
+    var link = urlParams.get('userid');
+
+    function donate4creator_iframe1_href() {
+        window.open(`https://www.donate4creator.com/u/` + link, '_blank').focus();
+    }
+</script>

@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/static/img/main/background.png');
+    background-image: url('https://cdn.jsdelivr.net/gh/anojds/sendmoneycreator/public/img/main/background.png');
     background-size: cover;
     background-repeat: no-repeat;
     flex-direction: column

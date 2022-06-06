@@ -3,13 +3,13 @@
 
 <head>
   <% include ./head.ejs %>
-  <title>Document</title>
-  <style>
-    @import url("/static/css/setting/style.css");
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-  </style>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+      @import url("/static/css/setting/style.css");
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
@@ -24,91 +24,134 @@
         <span class="hi_1"> 님.</span>
       </div>
       <span class="title">프로필 정보</span>
-        <div class="profile_info">
-          <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">아이디</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" value="<%= username %>" readonly>
-          </div>
+      <div class="profile_info">
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">아이디</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" value="<%= username %>" readonly>
+        </div>
 
-          <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label">한줄 소개</label>
-            <input type="text" class="form-control" id="short_description"
-              value="<% if (short_status !== '0') {%> <%= short_status %> <% } %>" placeholder="아직 한줄소개가 없군요"
-              maxlength="30">
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">한줄 소개</label>
+          <input type="text" class="form-control" id="short_description"
+            value="<% if (short_status !== '0') {%> <%= short_status %> <% } %>" placeholder="아직 한줄소개가 없군요"
+            maxlength="30">
+        </div>
+        <span class="label_title">태그</span>
+        <div class="tag_radio_wrap">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_1" value="option1"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox1">개발자</label>
           </div>
-          <span class="label_title">태그</span>
-          <div class="tag_radio_wrap">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_1" value="option1"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox1">개발자</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_2" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">방송 BJ</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_3" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">유튜버</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_4" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">디자이너</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_5" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">마케터</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_6" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">작가</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_7" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">아티스트</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_8" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">SNS</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="tag_9" value="option2"
-                onclick="radioToArrayData(this.id)">
-              <label class="form-check-label" for="inlineCheckbox2">기타</label>
-            </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_2" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">방송 BJ</label>
           </div>
-          <span class="label_title">소개</span>
-          <div class="input-group" style="margin-top: 10px;">
-            <textarea id="description" class="form-control" aria-label="With textarea" maxlength="500"></textarea>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_3" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">유튜버</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_4" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">디자이너</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_5" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">마케터</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_6" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">작가</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_7" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">아티스트</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_8" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">SNS</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="tag_9" value="option2"
+              onclick="radioToArrayData(this.id)">
+            <label class="form-check-label" for="inlineCheckbox2">기타</label>
           </div>
         </div>
-        <span class="title">후원 링크</span>
-        <span>QR코드는 후원 링크에 따라 자동으로 생성됩니다</span>
-        <span class="label_title">카카오</span>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon3">https://qr.kakaopay.com/</span>
-          <input type="text" class="form-control" id="kakao_url_input" aria-describedby="basic-addon3">
+        <span class="label_title">소개</span>
+        <div class="input-group" style="margin-top: 10px;">
+          <textarea id="description" class="form-control" aria-label="With textarea" maxlength="500"></textarea>
         </div>
-        <span class="label_title">토스</span>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon3">https://toss.me/</span>
-          <input type="text" class="form-control" id="toss_url_input" aria-describedby="basic-addon3">
-        </div>
-        <span class="label_title">페이팔</span>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon3">https://www.paypal.me/</span>
-          <input type="url" class="form-control" id="paypal_url_input" aria-describedby="basic-addon3">
-        </div>
-        <p style="font-size:320px"> </p>
-        <button type="button" class="btn btn-primary" onclick="post()">저장하기</button>
-        <span id="tagTogleTextSpan" name="tag" style="display: none"></span>
+      </div>
+      <span class="title">후원 링크</span>
+      <span>QR코드는 후원 링크에 따라 자동으로 생성됩니다</span>
+      <span class="label_title">카카오</span>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">https://qr.kakaopay.com/</span>
+        <input type="text" class="form-control" id="kakao_url_input" aria-describedby="basic-addon3">
+      </div>
+      <span class="label_title">토스</span>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">https://toss.me/</span>
+        <input type="text" class="form-control" id="toss_url_input" aria-describedby="basic-addon3">
+      </div>
+      <span class="label_title">페이팔</span>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">https://www.paypal.me/</span>
+        <input type="url" class="form-control" id="paypal_url_input" aria-describedby="basic-addon3">
+      </div>
+      <p style="font-size:320px"> </p>
+      <button type="button" class="btn btn-primary" onclick="post()">저장하기</button>
+      <span id="tagTogleTextSpan" name="tag" style="display: none"></span>
+      <span class="title">내 사이트에 버튼 달기</span>
+
+      <iframe src="http://localhost:2323/iframe/1?text=후원 하기&userid=anojds" height="38" width="110"
+        style="border-radius: 5px;"></iframe>
+
+      <span>1. iframe태그에 width, height속성으로 수정하면 크기를 조절할수 있습니다<br>2.src안에 text=값을 수정하면 버튼 텍스트를 수정할수 있습니다</span>
+
+      <div class="colorscripter-code"
+        style="color:#010101;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto">
+        <table class="colorscripter-code-table"
+          style="margin:0;padding:0;border:none;background-color:#fafafa;border-radius:4px;" cellspacing="0"
+          cellpadding="0">
+          <tr>
+            <td style="padding:6px;border-right:2px solid #e5e5e5">
+              <div
+                style="margin:0;padding:0;word-break:normal;text-align:right;color:#666;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%">
+                <div style="line-height:130%">1</div>
+              </div>
+            </td>
+            <td style="padding:6px 0;text-align:left">
+              <div
+                style="margin:0;padding:0;color:#010101;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%">
+                <div style="padding:0 6px; white-space:pre; line-height:130%"><span
+                    style="color:#010101">&lt;</span><span style="color:#066de2">iframe</span>&nbsp;<span
+                    style="color:#0a9989">src</span>=<span
+                    style="color:#df5000">"http://localhost:2323/iframe/1?text=후원&nbsp;하기&amp;userid=anojds"</span><span
+                    style="color:#0a9989"></span>&nbsp;<span style="color:#0a9989">height</span>=<span
+                    style="color:#df5000">"38"</span><span style="color:#0a9989"></span>&nbsp;<span
+                    style="color:#0a9989">width</span>=<span style="color:#df5000">"110"</span><span
+                    style="color:#0a9989"></span>&nbsp;<span style="color:#0a9989">style</span>=<span
+                    style="color:#df5000">"border-radius:&nbsp;5px;"</span><span style="color:#0a9989"></span><span
+                    style="color:#010101">&gt;</span><span style="color:#010101">&lt;</span><span
+                    style="color:#010101">/</span><span style="color:#066de2">iframe</span><span
+                    style="color:#010101">&gt;</span></div>
+              </div>
+            </td>
+            <td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e"
+                target="_blank" style="text-decoration:none;color:white"><span
+                  style="font-size:9px;word-break:normal;background-color:#e5e5e5;color:white;border-radius:10px;padding:1px">cs</span></a>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -123,7 +166,7 @@
           arr = data.split(',');
           arr.map(function (el) {
             document.getElementById("tag_" + el).checked = true;
-            tagTogle[el ] = !tagTogle[el ];
+            tagTogle[el] = !tagTogle[el];
             if (mapbool) {
               tagTogleText = tagTogleText + el
               mapbool = !mapbool
@@ -188,7 +231,7 @@
         });
         let result = await response.json();
 
-        if(result.isOkay === true) {
+        if (result.isOkay === true) {
           toastr.success('설정 저장이 완료되었습니다.', '저장')
         }
       }
