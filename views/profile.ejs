@@ -29,7 +29,7 @@
                 <span class="profile_username">
                     <%= username %>
                 </span>
-                <% if(kakao_url !== "0" ) { %>
+                <% if(short_status !== "0") { %>
                 <span class="profile_description">
                     <%= short_status %>
                 </span>
@@ -52,7 +52,7 @@
                         <span class="item_title" id="item_title_kakao">카카오 QR</span>
                         <img id="item_qr" src="<%= kakao_url_img %>" />
                         <span style="margin: 20px;">혹은</span>
-                        <span class="item_link_wrap" onclick="copy_text('<%= kakao_url %>')"><%= kakao_url %></span>
+                        <span class="item_link_wrap" id="item_title_kakao" onclick="copy_text('<%= kakao_url %>')"><%= kakao_url %></span>
                     </div>
                     <% } %>
                     <% if(toss_url !== "0") { %>
@@ -60,7 +60,7 @@
                         <span class="item_title" id="item_title_toss">토스 아이디</span>
                         <img id="item_qr" src="<%= toss_url_img %>" />
                         <span style="margin: 20px;">혹은</span>
-                        <div class="item_link_wrap" onclick="copy_text('<%= toss_url %>')"><%= toss_url %></div>
+                        <div class="item_link_wrap" id="item_title_toss" onclick="copy_text('<%= toss_url %>')"><%= toss_url %></div>
                     </div>
                     <% } %>
                     <% if(paypal_url !== "0") { %>
@@ -68,7 +68,7 @@
                         <span class="item_title" id="item_title_paypal">페이팔 링크</span>
                         <img id="item_qr" src="<%= kakao_url_img %>" />
                         <span style="margin: 20px;">혹은</span>
-                        <div class="item_link_wrap" onclick="copy_text('<%= paypal_url %>')"><%= paypal_url %></div>
+                        <div class="item_link_wrap" id="#item_title_paypal" onclick="copy_text('<%= paypal_url %>')"><%= paypal_url %></div>
                     </div>
                     <% } %>
                 </div>

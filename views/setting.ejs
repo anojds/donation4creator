@@ -25,7 +25,6 @@
         <span class="hi_1"> 님.</span>
       </div>
       <span class="title">프로필 정보</span>
-      <form action="/auth/edituser" method="post">
         <div class="profile_info">
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">아이디</label>
@@ -34,7 +33,7 @@
 
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label">한줄 소개</label>
-            <input type="text" class="form-control" id="formGroupExampleInput"
+            <input type="text" class="form-control" id="short_description"
               value="<% if (short_status !== '0') {%> <%= short_status %> <% } %>" placeholder="아직 한줄소개가 없군요"
               maxlength="30">
           </div>
@@ -88,7 +87,7 @@
           </div>
           <span class="label_title">소개</span>
           <div class="input-group" style="margin-top: 10px;">
-            <textarea class="form-control" aria-label="With textarea" maxlength="500"></textarea>
+            <textarea id="description" class="form-control" aria-label="With textarea" maxlength="500"></textarea>
           </div>
         </div>
         <span class="title">후원 링크</span>
@@ -109,21 +108,30 @@
           <input type="url" class="form-control" id="paypal_url_input" aria-describedby="basic-addon3">
         </div>
         <p style="font-size:320px"> </p>
-        <button type="submit" class="btn btn-primary">저장하기</button>
-      </form>
+        <button type="button" class="btn btn-primary" onclick="post()">저장하기</button>
+        <span id="tagTogleTextSpan" name="tag" style="display: none"></span>
     </div>
 
     <script type="text/javascript">
       let tagTogle = [false, false, false, false, false, false, false, false, false];
-      let tagTogleText = ""
+      let tagTogleText = "";
       function onloading(data, kakao_link, toss_link, paypal_link) {
-        // 라디오 버튼
-
-        arr = data.split(',');
-        arr.map(function (el) {
-          document.getElementById("tag_" + el).checked = true;
-          tagTogle[el - 1] = !tagTogle[el - 1];
-        });
+        if (data !== "0") {
+          let mapbool = true;
+          // 라디오 버튼
+          arr = data.split(',');
+          arr.map(function (el) {
+            console.log(el)
+            document.getElementById("tag_" + el).checked = true;
+            tagTogle[el - 1] = !tagTogle[el - 1];
+            if (mapbool) {
+              tagTogleText = tagTogleText + el
+              mapbool = !mapbool
+            } else {
+              tagTogleText = tagTogleText + "," + el
+            }
+          });
+        }
 
         // 페이먼트 url(카카오)
         if (kakao_link !== "0") {
@@ -155,10 +163,33 @@
               tagTogleText = tagTogleText + "," + mapindex
             }
           }
+          document.getElementById("tagTogleTextSpan").innerText = tagTogleText;
           mapindex++
         });
       }
       onloading('<%= tag %>', '<%= kakao_url %>', '<%= toss_url %>', '<%= paypal_url %>');
+
+      async function post() {
+        let data = {
+          tag: tagTogleText,
+          kakao_link: document.getElementById('kakao_url_input').value === undefined ? "0" : document.getElementById('kakao_url_input').value,
+          toss_link: document.getElementById('toss_url_input').value === undefined ? "0" : document.getElementById('toss_url_input').value,
+          paypal_link: document.getElementById('paypal_url_input').value,
+          s_description: document.getElementById('short_description').value,
+          description: document.getElementById('description').value
+        };
+
+        let response = await fetch('/auth/edituser', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(data)
+        });
+        let result = await response.json();
+        console.log(result);
+      }
+      post()
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

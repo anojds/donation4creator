@@ -26,7 +26,7 @@ router.post('/login', (req, res) => {
                             .createHash('sha512')
                             .update(password + result[0].salt)
                             .digest('hex');
-                            
+                            console.log('sss')
                         if (id === result[0].user_id && hashPassword === result[0].user_password) {
                             req.session.is_logined = true;
                             req.session.nickname = result[0].user_id;
@@ -34,7 +34,7 @@ router.post('/login', (req, res) => {
                         } else {
                         }
                     } else {
-                        res.send("alert('비밀번호가 일치하지 않습니다')")
+                        res.send("비밀번호가 일치하지 않습니다")
                     }
                 },
             );

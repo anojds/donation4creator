@@ -46,7 +46,7 @@ router.get('/:id', (req, res) => {
     }
     function create_qrcode_1() {
         return new Promise(function (resolve, reject) {
-            if (kakao_url !== "") {
+            if (kakao_url !== "" && kakao_url !== "0") {
                 qrcode.toDataURL(kakao_url, function (err, url) {
                     qr_img_kakao = url.toString('utf-8');
                     resolve('kakao_url is ok!');
@@ -59,7 +59,7 @@ router.get('/:id', (req, res) => {
 
     function create_qrcode_2() {
         return new Promise(function (resolve, reject) {
-            if (toss_url !== "") {
+            if (toss_url !== "" && toss_url !== "0") {
                 qrcode.toDataURL(toss_url, function (err, url) {
                     qr_img_toss = url.toString('utf-8');
                     resolve('toss_url is ok!');
@@ -72,7 +72,7 @@ router.get('/:id', (req, res) => {
 
     function create_qrcode_3() {
         return new Promise(function (resolve, reject) {
-            if (paypal_url !== "") {
+            if (paypal_url !== "" && paypal_url !== "0") {
                 qrcode.toDataURL(paypal_url, function (err, url) {
                     qr_img_paypal = url.toString('utf-8');
                     resolve('paypal_url is ok!');
