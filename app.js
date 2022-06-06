@@ -36,7 +36,7 @@ const login_sigin_ejs = require('./routes/login_signin.js');
 app.use('/', login_sigin_ejs);
 
 const setting_routes = require('./routes/setting.js');
-app.use('/', setting_routes);
+app.use('/setting', setting_routes);
 
 const profile_routes = require('./routes/profile.js');
 app.use('/u', profile_routes);

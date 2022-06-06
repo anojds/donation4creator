@@ -1,7 +1,6 @@
 const router = require('express').Router();
 var mysql = require('mysql');
 const qrcode = require('qrcode');
-let tagList = ["개발자","방송 BJ","디자이너","유튜버","작가","마케터","아티스트","SNS"];
 
 function authIsLogied(req) {
     if(req.session.is_logined) {
@@ -34,7 +33,7 @@ router.get('/:id', (req, res) => {
                     short_status = result[0].short_description;
                     create_acc_time = result[0].create_account_time;
                     introduce = result[0].user_description;
-                    tag = tagList[result[0].tag - 1]
+                    tag = result[0].tag
                     desired_amount = result[0].desired_amount;
                     kakao_url = result[0].kakao_payment_url;
                     toss_url = result[0].toss_payment_url;
@@ -87,6 +86,7 @@ router.get('/:id', (req, res) => {
         create_qrcode_1().then(function (data) {
             create_qrcode_2().then(function (data) {
                 create_qrcode_3().then(function (data) {
+                    console.log(tag)
                     res.render('profile.ejs', {
                         "user_icon": `${user_icon_link}`,
                         "user_header": `${user_header_link}`,

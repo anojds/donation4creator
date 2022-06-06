@@ -123,7 +123,7 @@
           arr.map(function (el) {
             console.log(el)
             document.getElementById("tag_" + el).checked = true;
-            tagTogle[el - 1] = !tagTogle[el - 1];
+            tagTogle[el ] = !tagTogle[el ];
             if (mapbool) {
               tagTogleText = tagTogleText + el
               mapbool = !mapbool
@@ -152,7 +152,7 @@
       function radioToArrayData(id) {
         let mapindex = 0;
         let mapbool = true;
-        tagTogle[id.replace(/tag_/g, '') - 1] = !tagTogle[id.replace(/tag_/g, '') - 1]
+        tagTogle[id.replace(/tag_/g, '')] = !tagTogle[id.replace(/tag_/g, '')]
         tagTogleText = "";
         tagTogle.map(function (el) {
           if (tagTogle[mapindex] === true) {

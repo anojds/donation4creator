@@ -10,7 +10,7 @@ function authIsLogied(req) {
 }
 
 
-router.get('/setting', (req, res) => {
+router.get('/', (req, res) => {
     if (req.session.is_logined) {
         let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = "", qr_img_toss = "", qr_img_paypal = "";
         return new Promise(function (resolve, reject) {
