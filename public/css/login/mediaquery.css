@@ -1,0 +1,8 @@
+@media screen and (max-width: 800px) {
+	.side_img_wrap {
+        display: none;
+    }
+    .main {
+        width: 100vw;
+    }
+}

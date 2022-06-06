@@ -26,19 +26,22 @@ router.get('/:id', (req, res) => {
             conn.connect(function (err) {
                 if (err) throw err;
                 conn.query(`select user_id, create_account_time, user_icon_link, user_header_link, short_description, user_description, tag, desired_amount, kakao_payment_url, toss_payment_url, paypal_payment_url FROM sendmoneycreator_user WHERE user_id = '${req.params.id}';`, function (err, result, fields) {
-                    if (err) throw err;
-                    user_icon_link = '/static/img/test/icon.png';
-                    user_header_link = '/static/img/test/sample_header.jpg';
-                    username = `${req.params.id}`;
-                    short_status = result[0].short_description;
-                    create_acc_time = result[0].create_account_time;
-                    introduce = result[0].user_description;
-                    tag = result[0].tag
-                    desired_amount = result[0].desired_amount;
-                    kakao_url = result[0].kakao_payment_url;
-                    toss_url = result[0].toss_payment_url;
-                    paypal_url = result[0].paypal_payment_url;
-                    resolve('mysql data handle is ended!');
+                    if (result.length > 0) {
+                        user_icon_link = '/static/img/test/icon.png';
+                        user_header_link = '/static/img/test/sample_header.jpg';
+                        username = `${req.params.id}`;
+                        short_status = result[0].short_description;
+                        create_acc_time = result[0].create_account_time;
+                        introduce = result[0].user_description;
+                        tag = result[0].tag
+                        desired_amount = result[0].desired_amount;
+                        kakao_url = result[0].kakao_payment_url;
+                        toss_url = result[0].toss_payment_url;
+                        paypal_url = result[0].paypal_payment_url;
+                        resolve('mysql data handle is ended!');
+                    } else {
+                        res.render('404.ejs')
+                    }
                 });
             });
         });

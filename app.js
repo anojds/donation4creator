@@ -42,7 +42,7 @@ const profile_routes = require('./routes/profile.js');
 app.use('/u', profile_routes);
 
 const iframe_routes = require('./routes/iframe.js');
-app.use('/iframe', iframe_routes);
+app.use('/u', iframe_routes);
 
 
 function authIsLogied(req) {
@@ -60,6 +60,9 @@ app.get('/', (req, res) => {
     })
 });
 
+app.use((req, res, next) => {
+    res.status(404).render('404.ejs')
+  });
 
 app.listen(port, () => {
     console.log(`server is listening at localhost:${port}`);
