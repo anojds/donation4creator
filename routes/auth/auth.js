@@ -26,12 +26,12 @@ router.post('/login', (req, res) => {
                             .createHash('sha512')
                             .update(password + result[0].salt)
                             .digest('hex');
-                            console.log('sss')
                         if (id === result[0].user_id && hashPassword === result[0].user_password) {
                             req.session.is_logined = true;
                             req.session.nickname = result[0].user_id;
                             res.redirect('/');
                         } else {
+                            res.send("비밀번호가 일치하지 않습니다")
                         }
                     } else {
                         res.send("비밀번호가 일치하지 않습니다")
@@ -79,6 +79,21 @@ router.get('/logout', (req, res) => {
     req.session.destroy(function (err) {
         res.redirect('/');
     });
+});
+
+router.get('/islogined', (req, res) => {
+    res.json({
+        'isLogined': req.session.is_logined,
+    })
+});
+
+router.get('/mypage', (req, res) => {
+    if (req.session.is_logined === true) {
+        res.redirect("/u/" + req.session.nickname)
+    } else {
+        res.redirect('/');
+    }
+    
 });
 
 

@@ -45,7 +45,11 @@ router.post('/edituser', (req, res) => {
             conn.query(
                 `UPDATE sendmoneycreator_user SET tag = '${tag}', kakao_payment_url = '${kakao_link}', toss_payment_url = '${toss_link}', paypal_payment_url = '${paypal_link}', short_description = '${s_description}', user_description = '${description}' WHERE user_id = '${id}';`,
                 function (err, result, fields) {
-                        if (err) throw err;
+                        if (err) {
+                            res.json({
+                                'isOkay': err
+                            })
+                        };
                 }
             );
         })

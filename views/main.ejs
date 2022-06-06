@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <% include ./head.ejs %>
+    <title>donate4creator</title>
     <style>
         @import url("/static/css/main/style.css");
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
@@ -13,6 +11,7 @@
 <body>
     <% include ./header.ejs %>
     <div class="wrap_1">
+        <span style="font-size:13px;color: rgb(134, 134, 134);">현재 이사이트는 개발중에 있습니다 버그,서버 오류등이 생길수 있습니다</span>
         <div class="text_wrap">
             <span class="text_1">좋아하는 <span class="text_2">크리에이터</span>에게 후원을 해보세요.</span>
         </div>
@@ -30,13 +29,13 @@
     <div class="wrap_3">
         <span class="list_title">나만의 사이트에 후원 버튼을 달아보세요.</span>
         <span class="list_span">일일이 후원 링크를 귀찮게 다는 대신 코드 한줄로 내 팬들과 연결해보세요.</span>
-        <img src="/static/img/main/1.png" width="40%">
+        <img src="/static/img/main/1.png" width="35%">
     </div>
 
     <div class="wrap_4">
         <span class="list_title2">팬들에게 지원을 받으세요.</span>
         <span class="list_span2">나를 좋아하는 팬들에게 지원을 받아 나를 더 성장 시켜보세요.</span>
-        <img src="/static/img/main/2.png" width="60%" style="margin-right: 50px;">
+        <img src="/static/img/main/2.png" width="50%" style="margin-right: 50px;">
     </div>
     
     <% include ./footer.ejs %>
