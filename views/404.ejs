@@ -8,22 +8,22 @@
     <title>Document</title>
     <style>
         body {
+            margin: 0px;
+            display: flex;
             justify-content: center;
+            height: 90vh;
+            align-items: center
         }
-
-        p {
-            background: linear-gradient(to top, #2ad065, #59ea88);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
+        .title {
             font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body style="padding-top: 60px;">
     <% include ./header.ejs %>
-        <p>404 - 정보를 찾을수 없습니다</p>
+    <p class="title">404 - 정보를 찾을수 없습니다</p>
 </body>
 
 </html>
