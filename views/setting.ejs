@@ -86,7 +86,7 @@
         </div>
         <span class="label_title">소개</span>
         <div class="input-group" style="margin-top: 10px;">
-          <textarea id="description" class="form-control" aria-label="With textarea" maxlength="500"><%= introduce %></textarea>
+          <textarea id="description" class="form-control" aria-label="With textarea" maxlength="500" placeholder="아직 소개가 없네요 한번 추가해보는게 어떨까요?"><% if (short_status !== '0') {%><%= introduce %><% } else { %><% } %></textarea>
         </div>
       </div>
       <span class="title">후원 링크</span>

@@ -21,22 +21,23 @@ router.post('/login', (req, res) => {
                 `select user_id, salt, user_password From sendmoneycreator_user where user_id = '${id}';`,
                 function (err, result, fields) {
                     if (result.length > 0) {
+                        console.log(result)
                         if (err) throw err;
 
                         const hashPassword = crypto
                         .createHash('sha512')
                         .update(pwd + result[0].salt)
                         .digest('hex');
+                        console.log("로그인 해시 :",hashPassword)
 
-
-                            console.log(result[0].salt,"\n\n",id,"\n",result[0].user_id,"\n비밀번호:\n",hashPassword,"\n",result[0].user_password);
+                            // console.log(result[0].salt,"\n\n",id,"\n",result[0].user_id,"\n비밀번호:\n",hashPassword,"\n",result[0].user_password);
 
                         if (id === result[0].user_id && hashPassword === result[0].user_password) {
                             req.session.is_logined = true;
                             req.session.nickname = result[0].user_id;
                             res.redirect('/');
                         } else {
-                            res.send("계정을 s찾을수 없습니다")
+                            res.send("계정을 ss찾을수 없습니다")
                         }
                     } else {
                         res.send("계정을 s찾을수 없습니다")
@@ -49,15 +50,21 @@ router.post('/login', (req, res) => {
 
 router.post('/register', (req, res) => {
     const body = req.body;
-    let id = body.id
-    let pwd = body.pwd
+    let id = body.id;
+    var pwd = body.pwd
+    var sppwd = pwd.toString().split(',');
+
     let email = body.email;
-    const salt = crypto.randomBytes(128).toString('base64');
-    const hashPassword = crypto
-        .createHash('sha512')
-        .update(pwd + salt)
-        .digest('hex');
-        console.log(hashPassword)
+    let salt = crypto.randomBytes(128).toString('base64');
+    let hashPassword = crypto
+    .createHash('sha512')
+    .update(sppwd[0] + salt)
+    .digest('hex');
+
+    console.log(`비밀번호 : ${sppwd[0]} `)
+    console.log(`회원가입 식 : ${sppwd[0] + salt} `)
+    console.log("회원가입 salt :",salt)
+    console.log("회원가입 해시 :",hashPassword)
 
     return new Promise(function (resolve, reject) {
         var conn = mysql.createConnection({

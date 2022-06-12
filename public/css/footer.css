@@ -20,6 +20,10 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+.fotter_top_1_list:hover {
+    cursor: pointer;
+}
+
 .footer_bottom {
     padding-top: 10px;
     border-top: 1.3px solid rgb(225, 225, 225);
