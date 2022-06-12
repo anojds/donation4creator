@@ -1,5 +1,5 @@
 const router = require('express').Router();
-var mysql = require('mysql');
+const getConnection = require('./db.js');
 
 function isUndefined(text) {
     if (text === " ") {
@@ -28,36 +28,30 @@ router.post('/edituser', (req, res) => {
     isUndefined(post.toss_link) ? toss_link = "0" : toss_link = "https://toss.me/" + post.toss_link;
     isUndefined(post.paypal_link) ? paypal_link = "0" : paypal_link = "https://www.paypal.me/" + post.paypal_link;
     isUndefined(post.s_description) ? s_description = "0" : s_description = post.s_description;
-    s_description.replace(/"/gi,'&quot;')
-    s_description.replace(/'/gi,'&quot;')
+    s_description.replace(/"/gi, '&quot;')
+    s_description.replace(/'/gi, '&quot;')
     isUndefined(post.description) ? description = "0" : description = post.description;
-    description.replace(/"/gi,'&quot;')
-    description.replace(/'/gi,'&quot;')
+    description.replace(/"/gi, '&quot;')
+    description.replace(/'/gi, '&quot;')
 
     var id = req.session.nickname;
-    return new Promise(function (resolve, reject) {
-        var conn = mysql.createConnection({
-            host: process.env.MYSQL_DEV_HOST,
-            port: process.env.MYSQL_DEV_PORT,
-            user: process.env.MYSQL_DEV_USER,
-            password: process.env.MYSQL_DEV_PASSWORD,
-            database: process.env.MYSQL_DEV_DATABASE
-        });
-        conn.connect(function (err) {
-            conn.query(
-                `UPDATE sendmoneycreator_user SET tag = '${tag}', kakao_payment_url = '${kakao_link}', toss_payment_url = '${toss_link}', paypal_payment_url = '${paypal_link}', short_description = '${s_description}', user_description = '${description}' WHERE user_id = '${id}';`,
-                function (err, result, fields) {
-                        if (err) {
-                            res.json({
-                                'isOkay': err
-                            })
-                        };
-                }
-            );
-        })
-        res.json({
-            'isOkay': true
-        })
+
+
+    getConnection((err,conn) => {
+        conn.query(
+            `UPDATE sendmoneycreator_user SET tag = '${tag}', kakao_payment_url = '${kakao_link}', toss_payment_url = '${toss_link}', paypal_payment_url = '${paypal_link}', short_description = '${s_description}', user_description = '${description}' WHERE user_id = '${id}';`,
+            function (err, result, fields) {
+                if (err) {
+                    res.json({
+                        'isOkay': err
+                    })
+                };
+            }
+        );
+        conn.release();
+    });
+    res.json({
+        'isOkay': true
     })
 })
 
