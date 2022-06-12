@@ -38,6 +38,7 @@
     var link = urlParams.get('userid');
 
     function donate4creator_iframe1_href() {
-        window.open(`https://www.donate4creator.com/u/` + link, '_blank').focus();
+        console.log(window.location.origin);
+        window.open(`${window.location.origin}/u/` + link, '_blank').focus();
     }
 </script>

@@ -90,3 +90,13 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .wrap_3 {
+        height: auto;
+    }
+    .wrap_4 {
+        height: auto;
+        padding-bottom: 30px;
+    }
+}

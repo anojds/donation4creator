@@ -43,7 +43,7 @@ const profile_routes = require('./routes/profile.js');
 app.use('/u', profile_routes);
 
 const iframe_routes = require('./routes/iframe.js');
-app.use('/u', iframe_routes);
+app.use('/iframe', iframe_routes);
 
 
 function authIsLogied(req) {

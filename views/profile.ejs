@@ -17,7 +17,8 @@
 
 <body>
     <% include ./header.ejs %>
-    <div class="profile_header"></div>
+    <div class="profile_header">
+    </div>
     <div class="wrap">
         <div class="main_content_wrap">
             <div class="user_data_wrap">
@@ -26,7 +27,11 @@
                 </div>
                 <span class="profile_username">
                     <%= username %>
+                    <% if(isdev === "1") { %>
+                        <img src="/static/img/profile/realdev.png" width="20" class="dev" onclick="alert('donate4creator.com의 인증 개발자입니다.')">
+                    <% } %>
                 </span>
+
                 <% if(short_status !== "0") { %>
                 <span class="profile_description">
                     <%= short_status %>
@@ -63,7 +68,7 @@
                     <% if(paypal_url !== "0") { %>
                     <div class="item_wrap" id="item_wrap_paypal">
                         <span class="item_title" id="item_title_paypal">페이팔 링크</span>
-                        <img id="item_qr" src="<%= kakao_url_img %>" />
+                        <img id="item_qr" src="<%= paypal_url_img %>" />
                         <span style="margin: 20px;">혹은</span>
                         <div class="item_link_wrap" id="#item_title_paypal" onclick="copy_text('<%= paypal_url %>')"><%= paypal_url %></div>
                     </div>
@@ -105,7 +110,10 @@
                 wrap.appendChild(div)
             })
         }
-        onLoadding('<%= tag %>')
+        var tag = '<%= tag %>';
+        if(tag !== "0") {
+            onLoadding('<%= tag %>')
+        }
     </script>
 </body>
 

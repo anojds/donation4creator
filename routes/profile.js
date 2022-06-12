@@ -12,7 +12,7 @@ function authIsLogied(req) {
 
 
 router.get('/:id', (req, res) => {
-    let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,paypal_url,qr_img_kakao = "", qr_img_toss = "", qr_img_paypal = "";
+    let user_icon_link,user_header_link,username,short_status,create_acc_time,introduce,tag,desired_amount,kakao_url,toss_url,isdev,paypal_url,qr_img_kakao = "", qr_img_toss = "", qr_img_paypal = "";
 
     function handleMysqlRequest() {
         return new Promise(function (resolve, reject) {
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
             });
             conn.connect(function (err) {
                 if (err) throw err;
-                conn.query(`select user_id, create_account_time, user_icon_link, user_header_link, short_description, user_description, tag, desired_amount, kakao_payment_url, toss_payment_url, paypal_payment_url FROM sendmoneycreator_user WHERE user_id = '${req.params.id}';`, function (err, result, fields) {
+                conn.query(`select user_id, create_account_time, user_icon_link, user_header_link, short_description, user_description, tag, desired_amount, kakao_payment_url, toss_payment_url, paypal_payment_url, isDev FROM sendmoneycreator_user WHERE user_id = '${req.params.id}';`, function (err, result, fields) {
                     if (result.length > 0) {
                         user_icon_link = '/static/img/test/icon.png';
                         user_header_link = '/static/img/test/sample_header.jpg';
@@ -38,6 +38,8 @@ router.get('/:id', (req, res) => {
                         kakao_url = result[0].kakao_payment_url;
                         toss_url = result[0].toss_payment_url;
                         paypal_url = result[0].paypal_payment_url;
+                        isdev = result[0].isDev;
+                        console.log(paypal_url)
                         resolve('mysql data handle is ended!');
                     } else {
                         res.render('404.ejs')
@@ -89,7 +91,6 @@ router.get('/:id', (req, res) => {
         create_qrcode_1().then(function (data) {
             create_qrcode_2().then(function (data) {
                 create_qrcode_3().then(function (data) {
-                    console.log(tag)
                     res.render('profile.ejs', {
                         "user_icon": `${user_icon_link}`,
                         "user_header": `${user_header_link}`,
@@ -105,7 +106,8 @@ router.get('/:id', (req, res) => {
                         "toss_url_img": `${qr_img_toss}`,
                         "paypal_url": `${paypal_url}`,
                         "paypal_url_img": `${qr_img_paypal}`,
-                        "isLogined": `${authIsLogied(req)}`
+                        "isLogined": `${authIsLogied(req)}`,
+                        "isdev": `${isdev}`
                     });
                 });
             });

@@ -86,7 +86,7 @@
         </div>
         <span class="label_title">소개</span>
         <div class="input-group" style="margin-top: 10px;">
-          <textarea id="description" class="form-control" aria-label="With textarea" maxlength="500"></textarea>
+          <textarea id="description" class="form-control" aria-label="With textarea" maxlength="500"><%= introduce %></textarea>
         </div>
       </div>
       <span class="title">후원 링크</span>
@@ -111,7 +111,7 @@
       <span id="tagTogleTextSpan" name="tag" style="display: none"></span>
       <span class="title">내 사이트에 버튼 달기</span>
 
-      <iframe src="localhost:2323/iframe/1?text=후원 하기&userid=<%= username %>" height="38" width="110"
+      <iframe src="http://localhost:2323/iframe/1?text=후원 하기&userid=<%= username %>" height="38" width="110"
         style="border-radius: 5px;"></iframe>
 
       <span>

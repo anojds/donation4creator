@@ -20,6 +20,12 @@ body {
     margin-top: 60px;
 }
 
+/* 인증 개발자 표시 */
+
+.dev:hover {
+    cursor: pointer;
+}
+
 /* 유저 ID 링크 */
 .user_data_wrap {
     display: flex;

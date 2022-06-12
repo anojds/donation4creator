@@ -23,8 +23,8 @@ router.post('/edituser', (req, res) => {
     var post = req.body;
     isUndefined(post.tag) ? tag = "0" : tag = post.tag;
     isUndefined(post.kakao_link) ? kakao_link = "0" : kakao_link = "https://qr.kakaopay.com/" + post.kakao_link;
-    isUndefined(post.toss_link) ? toss_link = "0" : toss_link = post.toss_link;
-    isUndefined(post.paypal_link) ? paypal_link = "0" : paypal_link = post.paypal_link;
+    isUndefined(post.toss_link) ? toss_link = "0" : toss_link = "https://toss.me/" + post.toss_link;
+    isUndefined(post.paypal_link) ? paypal_link = "0" : paypal_link = "https://www.paypal.me/" + post.paypal_link;
     isUndefined(post.s_description) ? s_description = "0" : s_description = post.s_description;
     s_description.replace(/"/gi,'&quot;')
     s_description.replace(/'/gi,'&quot;')
