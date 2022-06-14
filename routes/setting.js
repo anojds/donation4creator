@@ -29,8 +29,7 @@ router.get('/', (req, res) => {
                 kakao_url = result[0].kakao_payment_url;
                 toss_url = result[0].toss_payment_url;
                 paypal_url = result[0].paypal_payment_url;
-
-                res.render('setting.ejs', {
+               return res.render('setting.ejs', {
                     "user_icon": `${user_icon_link}`,
                     "user_header": `${user_header_link}`,
                     "username": `${username}`,

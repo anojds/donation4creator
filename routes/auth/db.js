@@ -6,7 +6,6 @@ let pool = mysql.createPool({
   user: process.env.MYSQL_DEV_USER,
   password: process.env.MYSQL_DEV_PASSWORD,
   database: process.env.MYSQL_DEV_DATABASE,
-  connectionLimit: 30
 });
 
 function getConnection(callback) {

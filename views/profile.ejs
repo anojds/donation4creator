@@ -48,6 +48,9 @@
             <% if(kakao_url === "0" && toss_url === "0" && paypal_url === "0") { %>
                 <span style="margin-left: 10px;color: rgb(176, 176, 176)">아직 후원 링크가 등록되지 않았습니다</span>
             <% } else { %>
+                <% if(desired_amount !== "0") { %>
+                <p style="color: rgb(129, 129, 129)">희망하는 금액 : <%= desired_amount %>원</p>
+                <% } %>
                 <div class="payment_wrap">
                     <% if(kakao_url !== "0" ) { %>
                     <div class="item_wrap" id="item_wrap_kakao">
