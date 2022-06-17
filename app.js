@@ -4,7 +4,9 @@ const express = require('express');
 const port = process.env.PORT || 2323;
 var session = require("express-session");
 var MySQLStore = require("express-mysql-session")(session);
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const ejs = require('ejs');
+const crypto = require("crypto");
 
 const app = express();
 
@@ -45,6 +47,9 @@ app.use('/u', profile_routes);
 
 const iframe_routes = require('./routes/iframe.js');
 app.use('/iframe', iframe_routes);
+
+const mail_routes = require('./routes/auth/mail.js');
+app.use('/', mail_routes);
 
 
 function authIsLogied(req) {

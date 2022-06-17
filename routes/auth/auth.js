@@ -1,5 +1,5 @@
 const router = require('express').Router();
-var util = require('util');
+
 var crypto = require('crypto');
 const getConnection = require('./db.js');
 
@@ -65,9 +65,7 @@ router.post('/register', (req, res) => {
         conn.release();
     });
 
-}
-
-);
+});
 
 router.get('/logout', (req, res) => {
     req.session.destroy(function (err) {
@@ -116,7 +114,6 @@ router.get('/mypage', (req, res) => {
     } else {
         res.redirect('/');
     }
-
 });
 
 
