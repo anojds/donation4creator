@@ -2,4 +2,8 @@
 /node_modules
 /.sql
 /.vscode
+<<<<<<< HEAD
 /config
+=======
+/config
+>>>>>>> 4d9354dd3b5d8dcf3532ddd66b36dd357ca63d08
