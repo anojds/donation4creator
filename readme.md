@@ -10,7 +10,7 @@
 
 ### 해결법: 
 
-nodemailer.createTransport 속성에 tls ciphers 속성을 SSLv3으로 변경후
+nodemailer.createTransport 속성에 tls > ciphers 속성을 SSLv3으로 변경후
 secureConnection 값을 false로 한다
 ``` js
 tls: {
