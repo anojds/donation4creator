@@ -1,6 +1,8 @@
 # donate4creator
 카카오페이, 토스 아이디를 이용하여 무료 송금 서비스입니다.
 
+사용 언어 : `node.js`
+
 ## 스크린샷
 ![1](https://user-images.githubusercontent.com/72495729/174440208-cbfda54c-b38a-4691-a6ba-1dac13ef0a28.png)
 
