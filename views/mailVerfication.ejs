@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./head.ejs %>
+    <title>donate4creator</title>
+    <style>
+        @import url("/static/css/login/mailverf.css");
+    </style>
+</head>
+<body>
+    <% include ./header.ejs %>
+    <img src="https://cdn.jsdelivr.net/gh/anojds/sendmoneycreator/public/img/icon.png" class="service_icon" style="margin-top: 100px">
+    <h4 class="title">donate4creator</h4>
+    <h1>회원가입이 완료되었습니다.</h1>
+    <h4>이메일에 발송된 링크를 클릭해 이메일 인증을 완료해주세요.</h4>
+    <hr>
+    <div class="wrap">
+        <span>아이디 : </span>
+        <span style="color: #1A73E8;font-weight:bold;"><%= id %></span>
+    </div>
+    <div class="wrap" style="margin-top: 10px;">
+        <span>메일 : </span>
+        <span style="color: #1A73E8;font-weight:bold;"><%= mail %></span>
+    </div>
+</body>
+</html>

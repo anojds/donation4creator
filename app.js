@@ -1,4 +1,3 @@
-
 // 모듈 로드
 const express = require('express');
 const port = process.env.PORT || 2323;
@@ -7,15 +6,16 @@ var MySQLStore = require("express-mysql-session")(session);
 var bodyParser = require('body-parser');
 const ejs = require('ejs');
 const crypto = require("crypto");
+var cookieParser = require('cookie-parser');
 
 const app = express();
 
 require('dotenv').config();
 app.set('view engine', 'ejs');
 app.use('/static', express.static(__dirname + '/public'));
-
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(session({
 	secret: process.env.SESSION_SECRET,
@@ -51,6 +51,12 @@ app.use('/iframe', iframe_routes);
 const mail_routes = require('./routes/auth/mail.js');
 app.use('/', mail_routes);
 
+app.get('/maild', (req, res) => {
+    res.render('mailVerficationOkay.ejs', {
+        "id": `anojds`,
+    })
+});
+
 
 function authIsLogied(req) {
     if(req.session.is_logined) {
@@ -69,7 +75,7 @@ app.get('/', (req, res) => {
 
 app.use((req, res, next) => {
     res.status(404).render('404.ejs')
-  });
+});
 
 app.listen(port, () => {
     console.log(`server is listening at localhost:${port}`);

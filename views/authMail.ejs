@@ -1,9 +1,74 @@
 <html>
+
+<head>
+  <style type="text/css">
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h4 {
+      color: #1A73E8;
+      font-weight: 500;
+    }
+
+    .top {
+      background: #fc00ff;
+      background: -webkit-linear-gradient(to right, #00dbde, #fc00ff);
+      background: linear-gradient(to right, #00dbde, #fc00ff);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 15px;
+    }
+
+    img {
+      margin-top: 70px;
+    }
+
+    hr {
+      width: 90%;
+    }
+
+    input {
+      border: 0px;
+      background-color: #1A73E8;
+      border-radius: 10px;
+      color: #FFFFFF;
+      padding: 15px 25px 15px 25px;
+      width: 100%;
+    }
+
+    input:hover {
+      cursor: pointer;
+    }
+
+    p {
+      margin-bottom: 100px;
+    }
+  </style>
+</head>
+
 <body>
-  <div>
-    <p style='color:black'>회원 가입을 위한 인증번호 입니다.</p>
-    <p style='color:black'>아래의 인증 번호를 입력하여 인증을 완료해주세요.</p>
-    <h2><%= authCode %></h2>
+  <div class="top">
+    <span style="margin: 30px 0px 30px 30px;">이메일 인증 링크</span>
   </div>
+  <img src="https://cdn.jsdelivr.net/gh/anojds/sendmoneycreator/public/img/icon.png" width="50" height="50"style="margin-top: 30px">
+  <p style='color:black'>아래의 랑크를 클릭하여 인증을 완료해주세요.</p>
+
+
+  <a style="width: 50%;" href="donate4creator.com/acc/<%= id %>" target='_blank'>
+    <input type="button" value="이메일 인증하기">
+  </a>
+
+  <a href="http://localhost:2323/acc/<%= id %>" target='_blank'>
+    <h4>http://localhost:2323/acc/<%= id %></h4>
+  </a>
 </body>
+
 </html>
