@@ -88,7 +88,7 @@ router.post('/register', (req, res) => {
                     let mailOptions = await transporter.sendMail({
                         from: '"sendmoney4creator👻" <sendmoney4creator@gmail.com>',
                         // to: 'sendmoney4creator@naver.com',
-                        to: 'appturbo102@gmail.com',
+                        to: email,
                         subject: '회원가입을 위한 인증번호를 입력해주세요.',
                         text: "Hello world?",
                         html: emailTemplete,
