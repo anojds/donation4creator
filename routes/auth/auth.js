@@ -18,13 +18,13 @@ router.post('/login', (req, res) => {
             `select user_id, user_email, salt, user_password,mail_is_certification From sendmoneycreator_user where user_id = '${id}';`,
             function (err, result, fields) {
                 if (result.length > 0) {
-                    if(result[0].mail_is_certification !== 0) {
+                    if (result[0].mail_is_certification !== 0) {
                         if (err) throw err;
                         const hashPassword = crypto
                             .createHash('sha512')
                             .update(pwd + result[0].salt)
                             .digest('hex');
-    
+
                         if (id === result[0].user_id && hashPassword === result[0].user_password) {
                             req.session.is_logined = true;
                             req.session.nickname = result[0].user_id;
@@ -61,7 +61,7 @@ router.post('/register', (req, res) => {
     let mail_verfication_salt = crypto.randomBytes(10).toString('hex');
     let base64_encoded_link = Buffer.from(id + "/" + mail_verfication_salt, "utf8").toString('base64');
 
-    getConnection((err,conn) => {
+    getConnection((err, conn) => {
         conn.query(
             `INSERT INTO sendmoneycreator_user (user_id, salt, user_password,user_email,create_account_time,mail_certification_id) values ('${id}','${salt}','${hashPassword}','${email}','1','${mail_verfication_salt}')`,
             async function (err, result, fields) {
@@ -91,7 +91,7 @@ router.post('/register', (req, res) => {
                         subject: '회원가입을 위한 인증번호를 입력해주세요.',
                         text: "Hello world?",
                         html: emailTemplete,
-                    });                
+                    });
                     transporter.sendMail(mailOptions, function (err, info) {
                         if (err) {
                             res.json({ msg: 'err' });
@@ -125,21 +125,20 @@ router.post('/leave', (req, res) => {
             conn.query(`select user_password, salt FROM sendmoneycreator_user WHERE user_id = '${req.session.nickname}';`,
                 function (err, result, fields) {
                     if (err) throw err;
-
                     const hashPassword = crypto
                         .createHash('sha512')
                         .update(pwd + result[0].salt)
                         .digest('hex');
 
-                        if(hashPassword === result[0].user_password) {
-                            res.json({ msg: 'true' });
-                        } else {
-                            res.json({ msg: 'false' });
-                        }
-
-                    return res.render('setting.ejs', {
-                        "user_icon": `${user_icon_link}`,
-                    });
+                    if (hashPassword === result[0].user_password) {
+                        conn.query(`DELETE FROM sendmoneycreator_user where user_id = '${req.session.nickname}';`,
+                            function (err, result, fields) {
+                                if (err) throw err;
+                                res.redirect('/auth/logout')
+                            });
+                    } else {
+                        res.json({ msg: 'false' });
+                    }
                 });
             conn.release();
 
@@ -158,7 +157,6 @@ router.get('/logout', (req, res) => {
 router.post('/ishaveacc', (req, res) => {
     const body = req.body;
     let id = body.id
-
 
     getConnection((err, conn) => {
         conn.query(
@@ -194,7 +192,7 @@ router.get('/mypage', (req, res) => {
     if (req.session.is_logined === true) {
         res.redirect("/u/" + req.session.nickname)
     } else {
-        res.redirect('/');
+        res.redirect('/login');
     }
 });
 

@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ./head.ejs %>
-    <title>donate4creator</title>
-    <style>
-        @import url("/static/css/login/mailverf.css");
-        @import url("/static/css/leave/style.css");
-    </style>
+        <title>donate4creator</title>
+        <style>
+            @import url("/static/css/login/mailverf.css");
+            @import url("/static/css/leave/style.css");
+        </style>
 </head>
+
 <body>
     <% include ./header.ejs %>
-    <img src="https://cdn.jsdelivr.net/gh/anojds/sendmoneycreator/public/img/icon.png" class="service_icon" style="margin-top: 100px">
-    <h4 class="title">donate4creator</h4>
-    <h1>회원 탈퇴</h1>
-    <h4>아래 비밀번호를 입력해주세요.</h4>
-    <hr>
-    <div class="wrap">
-        <input type="password" placeholder="비밀번호를 입력해주세요">
-        <input type="button" value="확인하기">
-    </div>
+        <img src="https://cdn.jsdelivr.net/gh/anojds/sendmoneycreator/public/img/icon.png" class="service_icon"
+            style="margin-top: 100px">
+        <h4 class="title">donate4creator</h4>
+        <h1>회원 탈퇴</h1>
+        <h4>아래 비밀번호를 입력해주세요.</h4>
+        <hr>
+        <div class="wrap">
+            <form action="/auth/leave" method="post">
+                <input id="passwordbox" name="pwd" type="password" placeholder="비밀번호를 입력해주세요">
+                <input type="submit" value="확인하기">
+            </form>
+        </div>
 </body>
+
 </html>
