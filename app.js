@@ -58,6 +58,13 @@ app.get('/maild', (req, res) => {
     })
 });
 
+app.get('/thanks', (req, res) => {
+    res.render('thanksfor.ejs', {
+        "id": `anojds`,
+        "mail": "appturbo102@gmail.com"
+    })
+});
+
 
 function authIsLogied(req) {
     if(req.session.is_logined) {
