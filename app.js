@@ -52,8 +52,9 @@ const mail_routes = require('./routes/auth/mail.js');
 app.use('/', mail_routes);
 
 app.get('/maild', (req, res) => {
-    res.render('mailVerficationOkay.ejs', {
+    res.render('mailVerfication.ejs', {
         "id": `anojds`,
+        "mail": "appturbo102@gmail.com"
     })
 });
 
