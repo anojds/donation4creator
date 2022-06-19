@@ -86,8 +86,7 @@ router.post('/register', (req, res) => {
                         }
                     });
                     let mailOptions = await transporter.sendMail({
-                        from: '"sendmoney4creator👻" <sendmoney4creator@gmail.com>',
-                        // to: 'sendmoney4creator@naver.com',
+                        from: '"sendmoney4creator 👻" <sendmoney4creator@gmail.com>',
                         to: email,
                         subject: '회원가입을 위한 인증번호를 입력해주세요.',
                         text: "Hello world?",
@@ -115,6 +114,39 @@ router.post('/register', (req, res) => {
         conn.release();
     });
 
+});
+
+router.post('/leave', (req, res) => {
+    var post = req.body;
+    var pwd = post.pwd;
+
+    if (req.session.is_logined) {
+        getConnection((err, conn) => {
+            conn.query(`select user_password, salt FROM sendmoneycreator_user WHERE user_id = '${req.session.nickname}';`,
+                function (err, result, fields) {
+                    if (err) throw err;
+
+                    const hashPassword = crypto
+                        .createHash('sha512')
+                        .update(pwd + result[0].salt)
+                        .digest('hex');
+
+                        if(hashPassword === result[0].user_password) {
+                            res.json({ msg: 'true' });
+                        } else {
+                            res.json({ msg: 'false' });
+                        }
+
+                    return res.render('setting.ejs', {
+                        "user_icon": `${user_icon_link}`,
+                    });
+                });
+            conn.release();
+
+        });
+    } else {
+        res.redirect('/login')
+    }
 });
 
 router.get('/logout', (req, res) => {

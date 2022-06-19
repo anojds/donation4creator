@@ -63,3 +63,14 @@ form {
 .col:hover {
     cursor: pointer;
 }
+
+.taltoe {
+    border: 1px solid #f00;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.taltoe > p {
+    font-weight: bold;
+    color: #f00;
+}
