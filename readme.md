@@ -32,3 +32,21 @@ tls: {
 
 secureConnection: false
 ```
+
+## ejs내 다른 ejs include 불러오기 오류
+---
+
+` 오류 내용 : 
+SyntaxError: Unexpected token / in /home/donation4creator/views/login.ejs while compiling ejs
+If the above error is not helpful, you may want to try EJS-Lint:
+https://github.com/RyanZim/EJS-Lint `
+
+<br>
+
+### 해결법: 
+
+ejs 파일 내 <% include ./header.ejs %> 해당 코드를 <%- include('./header') %> 로 변경한다
+
+``` js
+<%- include('./header') %>
+```
