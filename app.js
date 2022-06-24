@@ -1,6 +1,6 @@
 // 모듈 로드
 const express = require('express');
-const port = process.env.PORT || 2323;
+const port = 2323;
 var session = require("express-session");
 var MySQLStore = require("express-mysql-session")(session);
 var bodyParser = require('body-parser');
