@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 
 const app = express();
 
+// 
 require('dotenv').config();
 app.set('view engine', 'ejs');
 app.use('/static', express.static(__dirname + '/public'));
