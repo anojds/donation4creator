@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <% include ./head.ejs %>
+    <%- include('./head') %>
     <title><%= username %>의 프로필</title>
     <style>
         @import url("/static/css/profile/style.css");
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <% include ./header.ejs %>
+    <%- include('./header') %>
     <div class="profile_header">
     </div>
     <div class="wrap">
@@ -91,7 +91,7 @@
                         <% } %>
             </div>
     </div>
-    <% include ./footer.ejs %>
+    <%- include('./footer') %>
     <script>
         var kakao = false, toss = false, paypal = false;
         const clipboard = navigator.clipboard
