@@ -52,13 +52,6 @@ app.use('/iframe', iframe_routes);
 const mail_routes = require('./routes/auth/mail.js');
 app.use('/', mail_routes);
 
-app.get('/maild', (req, res) => {
-    res.render('mailVerfication.ejs', {
-        "id": `anojds`,
-        "mail": "appturbo102@gmail.com"
-    })
-});
-
 function authIsLogied(req) {
     if(req.session.is_logined) {
         return true;
