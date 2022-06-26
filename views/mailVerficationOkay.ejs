@@ -22,13 +22,8 @@
     </div>
     <script>
         let cut = 5;
-        
         setInterval(function(){ 
-            cut--
-            document.getElementById('time').innerText = cut + " 초뒤에 메인 화면으로 리다이렉트 됩니다.";
-            if(cut === 0) {
-                location.href="/";
-            }
+            cut-- === 0 ? location.href="/" : document.getElementById('time').innerText = cut + " 초뒤에 메인 화면으로 리다이렉트 됩니다.";
         }, 1000);
     </script>
 </body>
