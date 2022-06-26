@@ -94,13 +94,13 @@
     <%- include('./footer') %>
     <script>
         var kakao = false, toss = false, paypal = false;
-        const clipboard = navigator.clipboard
+        const clipboard = navigator.clipboard;
 
         function copy_text(text) {
             clipboard.writeText(text).then(function () {
                 window.alert(text + ' 가 복사되었습니다')
-            })
-        }
+            });
+        };
 
         function onLoadding(data) {
             let tagList = ["개발자","방송 BJ","유튜버","디자이너","작가","마케터","아티스트","SNS","기타"];
@@ -112,11 +112,11 @@
                 div.innerText = "#" + tagList[el-1]
                 wrap.appendChild(div)
             })
-        }
+        };
         var tag = '<%= tag %>';
         if(tag !== "0") {
             onLoadding('<%= tag %>')
-        }
+        };
     </script>
 </body>
 

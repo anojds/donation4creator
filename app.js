@@ -1,6 +1,6 @@
 // 모듈 로드
 const express = require('express');
-const port = 2323;
+const port = 1111;
 var session = require("express-session");
 var MySQLStore = require("express-mysql-session")(session);
 var bodyParser = require('body-parser');
@@ -52,13 +52,6 @@ app.use('/iframe', iframe_routes);
 const mail_routes = require('./routes/auth/mail.js');
 app.use('/', mail_routes);
 
-app.get('/maild', (req, res) => {
-    res.render('mailVerfication.ejs', {
-        "id": `anojds`,
-        "mail": "appturbo102@gmail.com"
-    })
-});
-
 function authIsLogied(req) {
     if(req.session.is_logined) {
         return true;
@@ -71,6 +64,12 @@ app.get('/', (req, res) => {
     res.render('main.ejs', {
         "is_logined": `${authIsLogied(req)}`,
         "is_logineds": `${req.session.is_logined}`
+    })
+});
+
+app.get('/maild', (req, res) => {
+    res.render('mailVerficationOkay.ejs', {
+        "id": `${'asd'}`
     })
 });
 
