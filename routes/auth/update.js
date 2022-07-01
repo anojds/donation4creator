@@ -21,7 +21,6 @@ router.post('/edituser', (req, res) => {
     var tag, kakao_link, toss_link, paypal_link, s_description, description, desired_amount
     var post = req.body;
 
-    console.log(post.description.replace("", "$"))
 
     isUndefined(post.tag) ? tag = "0" : tag = post.tag;
     isUndefined(post.kakao_link) ? kakao_link = "0" : kakao_link = "https://qr.kakaopay.com/" + post.kakao_link;
